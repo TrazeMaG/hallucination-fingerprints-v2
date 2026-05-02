@@ -1,0 +1,711 @@
+{
+  "model": "gpt2-xl",
+  "experiment": "logit_blending_intervention",
+  "timestamp": "2026-05-02T01:55:32.978340",
+  "alphas_tested": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "baseline_accuracy": 0.4,
+  "best_alpha": 0.5,
+  "best_accuracy": 0.85,
+  "improvement": 0.44999999999999996,
+  "alpha_results": {
+    "0.0": {
+      "correct": 8,
+      "total": 20,
+      "accuracy": 0.4
+    },
+    "0.1": {
+      "correct": 14,
+      "total": 20,
+      "accuracy": 0.7
+    },
+    "0.2": {
+      "correct": 15,
+      "total": 20,
+      "accuracy": 0.75
+    },
+    "0.3": {
+      "correct": 15,
+      "total": 20,
+      "accuracy": 0.75
+    },
+    "0.4": {
+      "correct": 15,
+      "total": 20,
+      "accuracy": 0.75
+    },
+    "0.5": {
+      "correct": 17,
+      "total": 20,
+      "accuracy": 0.85
+    }
+  },
+  "detailed_results": [
+    {
+      "prompt": "The capital of France is",
+      "answer": "Paris",
+      "category": "capitals",
+      "peak_layer": 41,
+      "peak_prob": 0.8578,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "Paris",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Paris",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Paris",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Paris",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Germany is",
+      "answer": "Berlin",
+      "category": "capitals",
+      "peak_layer": 42,
+      "peak_prob": 0.7868,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Berlin",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Berlin",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Berlin",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Berlin",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Berlin",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Japan is",
+      "answer": "Tokyo",
+      "category": "capitals",
+      "peak_layer": 40,
+      "peak_prob": 0.9767,
+      "predictions": {
+        "0.0": {
+          "predicted": "Tokyo",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "Tokyo",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Tokyo",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Tokyo",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Tokyo",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Tokyo",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Italy is",
+      "answer": "Rome",
+      "category": "capitals",
+      "peak_layer": 42,
+      "peak_prob": 0.8253,
+      "predictions": {
+        "0.0": {
+          "predicted": "Rome",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "Rome",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Rome",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Rome",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Rome",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Rome",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Spain is",
+      "answer": "Madrid",
+      "category": "capitals",
+      "peak_layer": 40,
+      "peak_prob": 0.917,
+      "predictions": {
+        "0.0": {
+          "predicted": "Madrid",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "Madrid",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Madrid",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Madrid",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Madrid",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Madrid",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Australia is",
+      "answer": "Canberra",
+      "category": "capitals",
+      "peak_layer": 35,
+      "peak_prob": 0.9574,
+      "predictions": {
+        "0.0": {
+          "predicted": "Canberra",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "Canberra",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Canberra",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Canberra",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Canberra",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Canberra",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Brazil is",
+      "answer": "Brasilia",
+      "category": "capitals",
+      "peak_layer": 35,
+      "peak_prob": 0.3818,
+      "predictions": {
+        "0.0": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "Bras",
+          "correct": false
+        },
+        "0.3": {
+          "predicted": "Bras",
+          "correct": false
+        },
+        "0.4": {
+          "predicted": "Bras",
+          "correct": false
+        },
+        "0.5": {
+          "predicted": "Bras",
+          "correct": false
+        }
+      }
+    },
+    {
+      "prompt": "The capital of China is",
+      "answer": "Beijing",
+      "category": "capitals",
+      "peak_layer": 35,
+      "peak_prob": 0.8002,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Beijing",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Beijing",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Beijing",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Beijing",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Beijing",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of India is",
+      "answer": "Delhi",
+      "category": "capitals",
+      "peak_layer": 35,
+      "peak_prob": 0.8464,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Delhi",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Delhi",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Delhi",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Delhi",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Delhi",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Russia is",
+      "answer": "Moscow",
+      "category": "capitals",
+      "peak_layer": 40,
+      "peak_prob": 0.9914,
+      "predictions": {
+        "0.0": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Moscow",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Moscow",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Moscow",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Moscow",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Moscow",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Canada is",
+      "answer": "Ottawa",
+      "category": "capitals",
+      "peak_layer": 36,
+      "peak_prob": 0.7228,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Ottawa",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Ottawa",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Ottawa",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Ottawa",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Ottawa",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The capital of Argentina is",
+      "answer": "Buenos",
+      "category": "capitals",
+      "peak_layer": 40,
+      "peak_prob": 0.9916,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Buenos",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Buenos",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Buenos",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Buenos",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Buenos",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The Berlin Wall fell in",
+      "answer": "1989",
+      "category": "history",
+      "peak_layer": 44,
+      "peak_prob": 0.9796,
+      "predictions": {
+        "0.0": {
+          "predicted": "1989",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "1989",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "1989",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "1989",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "1989",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "1989",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "Water is made of hydrogen and",
+      "answer": "oxygen",
+      "category": "science",
+      "peak_layer": 42,
+      "peak_prob": 0.9909,
+      "predictions": {
+        "0.0": {
+          "predicted": "oxygen",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "oxygen",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "oxygen",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "oxygen",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "oxygen",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "oxygen",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "Albert Einstein discovered",
+      "answer": "relativity",
+      "category": "science",
+      "peak_layer": 42,
+      "peak_prob": 0.5255,
+      "predictions": {
+        "0.0": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.3": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.4": {
+          "predicted": "the",
+          "correct": false
+        },
+        "0.5": {
+          "predicted": "relativity",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "Shakespeare wrote",
+      "answer": "Hamlet",
+      "category": "literature",
+      "peak_layer": 46,
+      "peak_prob": 0.0073,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.3": {
+          "predicted": "his",
+          "correct": false
+        },
+        "0.4": {
+          "predicted": "his",
+          "correct": false
+        },
+        "0.5": {
+          "predicted": "his",
+          "correct": false
+        }
+      }
+    },
+    {
+      "prompt": "The first president of the United States was",
+      "answer": "Washington",
+      "category": "history",
+      "peak_layer": 47,
+      "peak_prob": 0.0004,
+      "predictions": {
+        "0.0": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.3": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.4": {
+          "predicted": "a",
+          "correct": false
+        },
+        "0.5": {
+          "predicted": "a",
+          "correct": false
+        }
+      }
+    },
+    {
+      "prompt": "The theory of evolution was proposed by",
+      "answer": "Darwin",
+      "category": "science",
+      "peak_layer": 41,
+      "peak_prob": 0.9145,
+      "predictions": {
+        "0.0": {
+          "predicted": "Charles",
+          "correct": false
+        },
+        "0.1": {
+          "predicted": "Charles",
+          "correct": false
+        },
+        "0.2": {
+          "predicted": "Charles",
+          "correct": false
+        },
+        "0.3": {
+          "predicted": "Charles",
+          "correct": false
+        },
+        "0.4": {
+          "predicted": "Charles",
+          "correct": false
+        },
+        "0.5": {
+          "predicted": "Darwin",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The chemical symbol for gold is",
+      "answer": "Au",
+      "category": "science",
+      "peak_layer": 47,
+      "peak_prob": 0.8936,
+      "predictions": {
+        "0.0": {
+          "predicted": "Au",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "Au",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "Au",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "Au",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "Au",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "Au",
+          "correct": true
+        }
+      }
+    },
+    {
+      "prompt": "The speed of light is approximately",
+      "answer": "299",
+      "category": "science",
+      "peak_layer": 47,
+      "peak_prob": 0.2994,
+      "predictions": {
+        "0.0": {
+          "predicted": "299",
+          "correct": true
+        },
+        "0.1": {
+          "predicted": "299",
+          "correct": true
+        },
+        "0.2": {
+          "predicted": "299",
+          "correct": true
+        },
+        "0.3": {
+          "predicted": "299",
+          "correct": true
+        },
+        "0.4": {
+          "predicted": "299",
+          "correct": true
+        },
+        "0.5": {
+          "predicted": "299",
+          "correct": true
+        }
+      }
+    }
+  ]
+}
