@@ -1,0 +1,341 @@
+{
+  "model": "gemini-2.5-flash",
+  "timestamp": "2026-05-03T05:18:25.782586",
+  "method1_completion_vs_question": {
+    "completion_accuracy": 0.8666666666666667,
+    "question_accuracy": 0.9333333333333333,
+    "conflicts": 1,
+    "results": [
+      {
+        "completion_prompt": "The capital of France is",
+        "question": "What is the capital of France?",
+        "answer": "Paris",
+        "completion_response": "Paris",
+        "question_response": "Paris",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Germany is",
+        "question": "What is the capital of Germany?",
+        "answer": "Berlin",
+        "completion_response": "Berlin",
+        "question_response": "Berlin",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Japan is",
+        "question": "What is the capital of Japan?",
+        "answer": "Tokyo",
+        "completion_response": "Tokyo",
+        "question_response": "Tokyo",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Australia is",
+        "question": "What is the capital of Australia?",
+        "answer": "Canberra",
+        "completion_response": "Canberra",
+        "question_response": "Canberra",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Russia is",
+        "question": "What is the capital of Russia?",
+        "answer": "Moscow",
+        "completion_response": "Moscow",
+        "question_response": "Moscow",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of China is",
+        "question": "What is the capital of China?",
+        "answer": "Beijing",
+        "completion_response": "Beijing",
+        "question_response": "Beijing",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Brazil is",
+        "question": "What is the capital of Brazil?",
+        "answer": "Brasilia",
+        "completion_response": "Bras\u00edlia",
+        "question_response": "Bras\u00edlia",
+        "completion_correct": false,
+        "question_correct": false,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of India is",
+        "question": "What is the capital of India?",
+        "answer": "New Delhi",
+        "completion_response": "New Delhi",
+        "question_response": "New Delhi",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Canada is",
+        "question": "What is the capital of Canada?",
+        "answer": "Ottawa",
+        "completion_response": "Ottawa",
+        "question_response": "Ottawa",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The capital of Argentina is",
+        "question": "What is the capital of Argentina?",
+        "answer": "Buenos Aires",
+        "completion_response": "Buenos Aires",
+        "question_response": "Buenos Aires",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The Berlin Wall fell in",
+        "question": "In what year did the Berlin Wall fall?",
+        "answer": "1989",
+        "completion_response": "19",
+        "question_response": "1989",
+        "completion_correct": false,
+        "question_correct": true,
+        "conflict": true
+      },
+      {
+        "completion_prompt": "Water is made of hydrogen and",
+        "question": "What is water made of?",
+        "answer": "oxygen",
+        "completion_response": "oxygen",
+        "question_response": "Hydrogen and Oxygen",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The theory of evolution was proposed by",
+        "question": "Who proposed the theory of evolution?",
+        "answer": "Darwin",
+        "completion_response": "Charles Darwin",
+        "question_response": "Charles Darwin",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The chemical symbol for gold is",
+        "question": "What is the chemical symbol for gold?",
+        "answer": "Au",
+        "completion_response": "Au",
+        "question_response": "Au",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      },
+      {
+        "completion_prompt": "The first president of the United States was",
+        "question": "Who was the first president of the United States?",
+        "answer": "Washington",
+        "completion_response": "George Washington",
+        "question_response": "George Washington",
+        "completion_correct": true,
+        "question_correct": true,
+        "conflict": false
+      }
+    ]
+  },
+  "method2_cot_conflict": {
+    "conflicts": 0,
+    "results": [
+      {
+        "question": "What is the capital of France?",
+        "answer": "Paris",
+        "direct": "Paris",
+        "cot_answer": "The capital",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Germany?",
+        "answer": "Berlin",
+        "direct": "Berlin",
+        "cot_answer": "The",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Japan?",
+        "answer": "Tokyo",
+        "direct": "Tokyo",
+        "cot_answer": "The question",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Australia?",
+        "answer": "Canberra",
+        "direct": "Canberra",
+        "cot_answer": "The",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Russia?",
+        "answer": "Moscow",
+        "direct": "Moscow",
+        "cot_answer": "The question",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of China?",
+        "answer": "Beijing",
+        "direct": "Beijing",
+        "cot_answer": "The capital",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Brazil?",
+        "answer": "Brasilia",
+        "direct": "Bras\u00edlia",
+        "cot_answer": "The",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of India?",
+        "answer": "New Delhi",
+        "direct": "Delhi",
+        "cot_answer": "The",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Canada?",
+        "answer": "Ottawa",
+        "direct": "Ottawa",
+        "cot_answer": "The question",
+        "direct_correct": true,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Argentina?",
+        "answer": "Buenos Aires",
+        "direct": "Buenos",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      }
+    ]
+  },
+  "method3_sensitivity": {
+    "results": [
+      {
+        "fact": "Canberra",
+        "accuracy": 4,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "The capital of Australia is",
+            "response": "Canberra",
+            "correct": true
+          },
+          {
+            "prompt": "What is the capital of Australia?",
+            "response": "Canberra",
+            "correct": true
+          },
+          {
+            "prompt": "Australia's capital city is",
+            "response": "Canberra",
+            "correct": true
+          },
+          {
+            "prompt": "Name the capital of Australia.",
+            "response": "Canberra",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "fact": "Darwin",
+        "accuracy": 3,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "The theory of evolution was proposed by",
+            "response": "Charles Darwin",
+            "correct": true
+          },
+          {
+            "prompt": "Who proposed the theory of evolution?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Evolution was proposed by",
+            "response": "Charles Darwin",
+            "correct": true
+          },
+          {
+            "prompt": "Name the scientist who proposed evolution.",
+            "response": "Charles Darwin",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "fact": "1989",
+        "accuracy": 1,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "The Berlin Wall fell in",
+            "response": "1989",
+            "correct": true
+          },
+          {
+            "prompt": "In what year did the Berlin Wall fall?",
+            "response": "19",
+            "correct": false
+          },
+          {
+            "prompt": "The Berlin Wall came down in",
+            "response": "1",
+            "correct": false
+          },
+          {
+            "prompt": "When did the Berlin Wall fall?",
+            "response": "19",
+            "correct": false
+          }
+        ]
+      }
+    ]
+  }
+}

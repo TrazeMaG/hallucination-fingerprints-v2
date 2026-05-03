@@ -1,0 +1,389 @@
+{
+  "model": "gpt-3.5-turbo",
+  "timestamp": "2026-05-03T01:25:20.472522",
+  "method1_logit_bias": {
+    "direct_accuracy": 0.0,
+    "suppressed_accuracy": 0.0,
+    "improved": 0,
+    "degraded": 0,
+    "results": [
+      {
+        "question": "What is the capital of France?",
+        "correct": "Paris",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Germany?",
+        "correct": "Berlin",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Japan?",
+        "correct": "Tokyo",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Australia?",
+        "correct": "Canberra",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Brazil?",
+        "correct": "Brasilia",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of China?",
+        "correct": "Beijing",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of India?",
+        "correct": "New Delhi",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Russia?",
+        "correct": "Moscow",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Canada?",
+        "correct": "Ottawa",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the capital of Argentina?",
+        "correct": "Buenos Aires",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "In what year did the Berlin Wall fall?",
+        "correct": "1989",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is water made of?",
+        "correct": "hydrogen and oxygen",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "Who proposed the theory of evolution?",
+        "correct": "Darwin",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "What is the chemical symbol for gold?",
+        "correct": "Au",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      },
+      {
+        "question": "Who was the first president of the United States?",
+        "correct": "Washington",
+        "direct": "",
+        "suppressed": "",
+        "direct_correct": false,
+        "suppressed_correct": false,
+        "improved": false,
+        "degraded": false
+      }
+    ]
+  },
+  "method2_cot_conflict": {
+    "direct_accuracy": 0.0,
+    "cot_accuracy": 0.0,
+    "conflicts": 0,
+    "results": [
+      {
+        "question": "What is the capital of France?",
+        "correct": "Paris",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Germany?",
+        "correct": "Berlin",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Japan?",
+        "correct": "Tokyo",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Australia?",
+        "correct": "Canberra",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Brazil?",
+        "correct": "Brasilia",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of China?",
+        "correct": "Beijing",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of India?",
+        "correct": "New Delhi",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Russia?",
+        "correct": "Moscow",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Canada?",
+        "correct": "Ottawa",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the capital of Argentina?",
+        "correct": "Buenos Aires",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "In what year did the Berlin Wall fall?",
+        "correct": "1989",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is water made of?",
+        "correct": "hydrogen and oxygen",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "Who proposed the theory of evolution?",
+        "correct": "Darwin",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "What is the chemical symbol for gold?",
+        "correct": "Au",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      },
+      {
+        "question": "Who was the first president of the United States?",
+        "correct": "Washington",
+        "direct": "",
+        "cot_answer": "",
+        "direct_correct": false,
+        "cot_correct": false,
+        "conflict": false
+      }
+    ]
+  },
+  "method3_sensitivity": {
+    "results": [
+      {
+        "fact": "Canberra",
+        "accuracy": 0,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "What is the capital of Australia?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Australia's capital city is?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Name the capital of Australia.",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "The capital city of Australia is",
+            "response": "",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "fact": "Darwin",
+        "accuracy": 0,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "Who proposed the theory of evolution?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "The theory of evolution was proposed by",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Name the scientist who proposed evolution.",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Evolution theory was developed by which scientist?",
+            "response": "",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "fact": "Ottawa",
+        "accuracy": 0,
+        "total": 4,
+        "results": [
+          {
+            "prompt": "What is the capital of Canada?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Canada's capital is?",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "Name the capital city of Canada.",
+            "response": "",
+            "correct": false
+          },
+          {
+            "prompt": "The capital of Canada is",
+            "response": "",
+            "correct": false
+          }
+        ]
+      }
+    ]
+  }
+}
