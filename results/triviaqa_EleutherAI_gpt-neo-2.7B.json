@@ -1,0 +1,29 @@
+{
+  "model": "EleutherAI/gpt-neo-2.7B",
+  "model_params": "2.7B",
+  "benchmark": "TriviaQA",
+  "n_samples": 289,
+  "timestamp": "2026-05-03T05:42:10.092864",
+  "baseline_accuracy": 0.02768166089965398,
+  "best_alpha": 0.0,
+  "best_accuracy": 0.02768166089965398,
+  "improvement": 0.0,
+  "alpha_results": {
+    "0.0": {
+      "correct": 8,
+      "accuracy": 0.02768166089965398
+    },
+    "0.1": {
+      "correct": 8,
+      "accuracy": 0.02768166089965398
+    },
+    "0.3": {
+      "correct": 7,
+      "accuracy": 0.02422145328719723
+    },
+    "0.5": {
+      "correct": 7,
+      "accuracy": 0.02422145328719723
+    }
+  }
+}

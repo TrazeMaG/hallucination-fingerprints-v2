@@ -1,0 +1,241 @@
+{
+  "benchmark": "HallBench v2",
+  "timestamp": "2026-05-03T05:48:26.938187",
+  "n_tier1": 25,
+  "n_tier2": 15,
+  "n_tier3": 10,
+  "results": [
+    {
+      "model": "gpt2-xl",
+      "params": "1.5B",
+      "family": "strong",
+      "tiers": {
+        "tier1": {
+          "0.0": {
+            "correct": 9,
+            "total": 25,
+            "accuracy": 0.36
+          },
+          "0.3": {
+            "correct": 18,
+            "total": 25,
+            "accuracy": 0.72
+          },
+          "0.5": {
+            "correct": 20,
+            "total": 25,
+            "accuracy": 0.8
+          }
+        },
+        "tier2": {
+          "0.0": {
+            "correct": 7,
+            "total": 15,
+            "accuracy": 0.4666666666666667
+          },
+          "0.3": {
+            "correct": 8,
+            "total": 15,
+            "accuracy": 0.5333333333333333
+          },
+          "0.5": {
+            "correct": 8,
+            "total": 15,
+            "accuracy": 0.5333333333333333
+          }
+        },
+        "tier3": {
+          "0.0": {
+            "correct": 0,
+            "total": 10,
+            "accuracy": 0.0
+          },
+          "0.3": {
+            "correct": 0,
+            "total": 10,
+            "accuracy": 0.0
+          },
+          "0.5": {
+            "correct": 0,
+            "total": 10,
+            "accuracy": 0.0
+          }
+        }
+      }
+    },
+    {
+      "model": "EleutherAI/gpt-neo-2.7B",
+      "params": "2.7B",
+      "family": "weak",
+      "tiers": {
+        "tier1": {
+          "0.0": {
+            "correct": 5,
+            "total": 25,
+            "accuracy": 0.2
+          },
+          "0.3": {
+            "correct": 5,
+            "total": 25,
+            "accuracy": 0.2
+          },
+          "0.5": {
+            "correct": 5,
+            "total": 25,
+            "accuracy": 0.2
+          }
+        },
+        "tier2": {
+          "0.0": {
+            "correct": 3,
+            "total": 15,
+            "accuracy": 0.2
+          },
+          "0.3": {
+            "correct": 3,
+            "total": 15,
+            "accuracy": 0.2
+          },
+          "0.5": {
+            "correct": 3,
+            "total": 15,
+            "accuracy": 0.2
+          }
+        },
+        "tier3": {
+          "0.0": {
+            "correct": 2,
+            "total": 10,
+            "accuracy": 0.2
+          },
+          "0.3": {
+            "correct": 2,
+            "total": 10,
+            "accuracy": 0.2
+          },
+          "0.5": {
+            "correct": 2,
+            "total": 10,
+            "accuracy": 0.2
+          }
+        }
+      }
+    },
+    {
+      "model": "microsoft/phi-2",
+      "params": "2.7B",
+      "family": "strong",
+      "tiers": {
+        "tier1": {
+          "0.0": {
+            "correct": 18,
+            "total": 25,
+            "accuracy": 0.72
+          },
+          "0.3": {
+            "correct": 20,
+            "total": 25,
+            "accuracy": 0.8
+          },
+          "0.5": {
+            "correct": 20,
+            "total": 25,
+            "accuracy": 0.8
+          }
+        },
+        "tier2": {
+          "0.0": {
+            "correct": 8,
+            "total": 15,
+            "accuracy": 0.5333333333333333
+          },
+          "0.3": {
+            "correct": 8,
+            "total": 15,
+            "accuracy": 0.5333333333333333
+          },
+          "0.5": {
+            "correct": 8,
+            "total": 15,
+            "accuracy": 0.5333333333333333
+          }
+        },
+        "tier3": {
+          "0.0": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          },
+          "0.3": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          },
+          "0.5": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          }
+        }
+      }
+    },
+    {
+      "model": "Qwen/Qwen1.5-1.8B",
+      "params": "1.8B",
+      "family": "strong",
+      "tiers": {
+        "tier1": {
+          "0.0": {
+            "correct": 8,
+            "total": 25,
+            "accuracy": 0.32
+          },
+          "0.3": {
+            "correct": 12,
+            "total": 25,
+            "accuracy": 0.48
+          },
+          "0.5": {
+            "correct": 15,
+            "total": 25,
+            "accuracy": 0.6
+          }
+        },
+        "tier2": {
+          "0.0": {
+            "correct": 1,
+            "total": 15,
+            "accuracy": 0.06666666666666667
+          },
+          "0.3": {
+            "correct": 6,
+            "total": 15,
+            "accuracy": 0.4
+          },
+          "0.5": {
+            "correct": 6,
+            "total": 15,
+            "accuracy": 0.4
+          }
+        },
+        "tier3": {
+          "0.0": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          },
+          "0.3": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          },
+          "0.5": {
+            "correct": 3,
+            "total": 10,
+            "accuracy": 0.3
+          }
+        }
+      }
+    }
+  ]
+}

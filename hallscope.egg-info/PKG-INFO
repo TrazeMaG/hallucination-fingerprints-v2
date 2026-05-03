@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: hallscope
+Version: 0.1.0
+Summary: Hallucination interpretability library for transformer language models
+Home-page: https://github.com/TrazeMaG/hallucination-fingerprints-v2
+Author: Nikhil Upadhyay
+Author-email: nikhil25000@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.0.0
+Requires-Dist: transformer_lens>=2.0.0
+Requires-Dist: transformers>=4.40.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# HallScope
+
+Hallucination interpretability library for transformer language models.
+
+Built on top of TransformerLens. Companion to the paper:
+"Last-Layer Suppression: A Universal Causal Mechanism of Factual 
+Hallucination in Transformer Language Models"
+
+## Install
+
+```bash
+pip install hallscope
+```
+
+## Usage
+
+```python
+from hallscope import HallScope
+
+hs = HallScope("gpt2-xl")
+
+# Analyse a prompt
+report = hs.analyse("The capital of France is", "Paris")
+print(report)
+# HallScope Analysis
+#   Model:              gpt2-xl
+#   Predicted:          a
+#   Correct answer:     Paris
+#   Hallucination type: TYPE2A_SUPPRESSION
+#   Peak factual layer: Block 41 (85% depth)
+#   Suppression ratio:  18.6x
+
+# Correct it
+corrected = hs.correct("The capital of France is")
+print(corrected)  # Paris
+
+# Run benchmark
+from hallscope.benchmark import get_capitals_benchmark
+prompts, answers = get_capitals_benchmark()
+results = hs.benchmark(prompts, answers)
+print(results)
+```
+
+## Models Tested
+
+| Model | Suppression | Intervention |
+|-------|-------------|--------------|
+| GPT-2 XL | 20.8x | +45% |
+| Phi-2 | 10.8x | +5% |
+| Qwen 1.5 1.8B | 2.5x | +40% |
+| GPT-Neo 2.7B | 1.0x | +0% |
+| Pythia 2.8B | 1.1x | +0% |

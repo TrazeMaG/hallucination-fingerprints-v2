@@ -1,0 +1,29 @@
+{
+  "model": "gpt2-xl",
+  "model_params": "1.5B",
+  "benchmark": "TriviaQA",
+  "n_samples": 289,
+  "timestamp": "2026-05-03T05:34:10.117813",
+  "baseline_accuracy": 0.04844290657439446,
+  "best_alpha": 0.5,
+  "best_accuracy": 0.0657439446366782,
+  "improvement": 0.01730103806228373,
+  "alpha_results": {
+    "0.0": {
+      "correct": 14,
+      "accuracy": 0.04844290657439446
+    },
+    "0.1": {
+      "correct": 12,
+      "accuracy": 0.04152249134948097
+    },
+    "0.3": {
+      "correct": 15,
+      "accuracy": 0.05190311418685121
+    },
+    "0.5": {
+      "correct": 19,
+      "accuracy": 0.0657439446366782
+    }
+  }
+}

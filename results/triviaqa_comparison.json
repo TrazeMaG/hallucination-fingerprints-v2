@@ -1,0 +1,14 @@
+[
+  {
+    "model": "gpt2-xl",
+    "baseline": 0.04844290657439446,
+    "best": 0.0657439446366782,
+    "improvement": 0.01730103806228373
+  },
+  {
+    "model": "EleutherAI/gpt-neo-2.7B",
+    "baseline": 0.02768166089965398,
+    "best": 0.02768166089965398,
+    "improvement": 0.0
+  }
+]

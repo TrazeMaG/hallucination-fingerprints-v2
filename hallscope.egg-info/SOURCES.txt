@@ -1,0 +1,12 @@
+README.md
+setup.py
+hallscope/__init__.py
+hallscope/benchmark.py
+hallscope/core.py
+hallscope/hallbench.py
+hallscope/report.py
+hallscope.egg-info/PKG-INFO
+hallscope.egg-info/SOURCES.txt
+hallscope.egg-info/dependency_links.txt
+hallscope.egg-info/requires.txt
+hallscope.egg-info/top_level.txt
