@@ -1,0 +1,1027 @@
+{
+  "model": "gpt2-xl",
+  "timestamp": "2026-05-03T13:04:16.112300",
+  "case1_type2b": {
+    "n_prompts": 15,
+    "alpha_results": {
+      "0.0": 0,
+      "0.3": 0,
+      "0.5": 0
+    },
+    "results": [
+      {
+        "prompt": "The capital of Bhutan is",
+        "answer": "Thimphu",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 5,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "the",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Vanuatu is",
+        "answer": "Port",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 11.252,
+        "correct_rank": 4,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "the",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Kyrgyzstan is",
+        "answer": "Bishkek",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 1,
+        "predictions": {
+          "0.0": {
+            "predicted": "B",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "B",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "B",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Suriname is",
+        "answer": "Paramaribo",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 1.462,
+        "correct_rank": 170,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "the",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Eritrea is",
+        "answer": "Asmara",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 3,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "the",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Timor-Leste is",
+        "answer": "Dili",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 1.0,
+        "correct_rank": 36,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "the",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The chemical symbol for hassium is",
+        "answer": "Hs",
+        "category": "obscure_science",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 3,
+        "predictions": {
+          "0.0": {
+            "predicted": "Si",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "Si",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "Si",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The chemical symbol for meitnerium is",
+        "answer": "Mt",
+        "category": "obscure_science",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 1.0,
+        "correct_rank": 1711,
+        "predictions": {
+          "0.0": {
+            "predicted": "C",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "C",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "C",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The Treaty of Westphalia was signed in",
+        "answer": "1648",
+        "category": "obscure_history",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 1,
+        "predictions": {
+          "0.0": {
+            "predicted": "16",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "16",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "16",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The Battle of Adwa was in",
+        "answer": "1896",
+        "category": "obscure_history",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 4.452,
+        "correct_rank": 552,
+        "predictions": {
+          "0.0": {
+            "predicted": "fact",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "fact",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "fact",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The Planck constant is approximately",
+        "answer": "6.626",
+        "category": "obscure_science",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 8,
+        "predictions": {
+          "0.0": {
+            "predicted": "1",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "1",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "1",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The speed of sound in water is",
+        "answer": "1480",
+        "category": "obscure_science",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 1.0,
+        "correct_rank": 145,
+        "predictions": {
+          "0.0": {
+            "predicted": "about",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "about",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "about",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Djibouti is",
+        "answer": "Djibouti",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 51.614,
+        "correct_rank": 7,
+        "predictions": {
+          "0.0": {
+            "predicted": "the",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "Dj",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "Dj",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Nauru is",
+        "answer": "Yaren",
+        "category": "obscure_capital",
+        "hallucination_type": "TYPE2B",
+        "suppression_ratio": 1.11,
+        "correct_rank": 263,
+        "predictions": {
+          "0.0": {
+            "predicted": "a",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "a",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "a",
+            "correct": false
+          }
+        }
+      },
+      {
+        "prompt": "The Battle of Hastings was in",
+        "answer": "1066",
+        "category": "obscure_history",
+        "hallucination_type": "TYPE2A",
+        "suppression_ratio": 1.0,
+        "correct_rank": 2,
+        "predictions": {
+          "0.0": {
+            "predicted": "fact",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "fact",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "fact",
+            "correct": false
+          }
+        }
+      }
+    ]
+  },
+  "case2_fluency": {
+    "n_prompts": 10,
+    "changed_at_03": 1,
+    "changed_at_05": 3,
+    "results": [
+      {
+        "prompt": "The weather today is",
+        "baseline": "perfect",
+        "alpha_03": "perfect",
+        "alpha_05": "sunny",
+        "changed_at_03": false,
+        "changed_at_05": true
+      },
+      {
+        "prompt": "I went to the store and bought",
+        "baseline": "a",
+        "alpha_03": "a",
+        "alpha_05": "a",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "Once upon a time there was a",
+        "baseline": "man",
+        "alpha_03": "man",
+        "alpha_05": "little",
+        "changed_at_03": false,
+        "changed_at_05": true
+      },
+      {
+        "prompt": "The best way to make tea is",
+        "baseline": "to",
+        "alpha_03": "to",
+        "alpha_05": "to",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "She walked slowly towards the",
+        "baseline": "door",
+        "alpha_03": "door",
+        "alpha_05": "door",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "The children played happily in the",
+        "baseline": "yard",
+        "alpha_03": "yard",
+        "alpha_05": "yard",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "He opened the letter and read the",
+        "baseline": "words",
+        "alpha_03": "words",
+        "alpha_05": "words",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "The train arrived at the station at",
+        "baseline": "about",
+        "alpha_03": "midnight",
+        "alpha_05": "midnight",
+        "changed_at_03": true,
+        "changed_at_05": true
+      },
+      {
+        "prompt": "After dinner they watched a",
+        "baseline": "movie",
+        "alpha_03": "movie",
+        "alpha_05": "movie",
+        "changed_at_03": false,
+        "changed_at_05": false
+      },
+      {
+        "prompt": "The dog ran across the",
+        "baseline": "street",
+        "alpha_03": "street",
+        "alpha_05": "street",
+        "changed_at_03": false,
+        "changed_at_05": false
+      }
+    ]
+  },
+  "case3_multi_token": {
+    "results": [
+      {
+        "prompt": "The capital of the United States is",
+        "first_token": "Washington",
+        "baseline": "Washington",
+        "blended_05": "Washington",
+        "baseline_correct": true,
+        "blended_correct": true
+      },
+      {
+        "prompt": "The theory of relativity was proposed by Albert",
+        "first_token": "Einstein",
+        "baseline": "Einstein",
+        "blended_05": "Einstein",
+        "baseline_correct": true,
+        "blended_correct": true
+      },
+      {
+        "prompt": "The largest country in the world by area is",
+        "first_token": "Russia",
+        "baseline": "the",
+        "blended_05": "India",
+        "baseline_correct": false,
+        "blended_correct": false
+      },
+      {
+        "prompt": "The Amazon river flows through",
+        "first_token": "South",
+        "baseline": "the",
+        "blended_05": "the",
+        "baseline_correct": false,
+        "blended_correct": false
+      },
+      {
+        "prompt": "The first President of the United States was George",
+        "first_token": "Washington",
+        "baseline": "Washington",
+        "blended_05": "Washington",
+        "baseline_correct": true,
+        "blended_correct": true
+      }
+    ]
+  },
+  "case4_alpha_sweep": {
+    "n_prompts": 10,
+    "alpha_results": {
+      "0.0": {
+        "correct": 5,
+        "accuracy": 0.5
+      },
+      "0.1": {
+        "correct": 6,
+        "accuracy": 0.6
+      },
+      "0.2": {
+        "correct": 7,
+        "accuracy": 0.7
+      },
+      "0.3": {
+        "correct": 8,
+        "accuracy": 0.8
+      },
+      "0.4": {
+        "correct": 8,
+        "accuracy": 0.8
+      },
+      "0.5": {
+        "correct": 9,
+        "accuracy": 0.9
+      },
+      "0.6": {
+        "correct": 9,
+        "accuracy": 0.9
+      },
+      "0.7": {
+        "correct": 9,
+        "accuracy": 0.9
+      },
+      "0.8": {
+        "correct": 9,
+        "accuracy": 0.9
+      },
+      "0.9": {
+        "correct": 9,
+        "accuracy": 0.9
+      },
+      "1.0": {
+        "correct": 9,
+        "accuracy": 0.9
+      }
+    },
+    "optimal_alpha": 0.5,
+    "results": [
+      {
+        "prompt": "The capital of France is",
+        "answer": "Paris",
+        "predictions": {
+          "0.0": {
+            "predicted": "a",
+            "correct": false
+          },
+          "0.1": {
+            "predicted": "a",
+            "correct": false
+          },
+          "0.2": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Paris",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Paris",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Germany is",
+        "answer": "Berlin",
+        "predictions": {
+          "0.0": {
+            "predicted": "a",
+            "correct": false
+          },
+          "0.1": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Berlin",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Berlin",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The capital of Japan is",
+        "answer": "Tokyo",
+        "predictions": {
+          "0.0": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.1": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Tokyo",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Tokyo",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The theory of evolution was proposed by",
+        "answer": "Darwin",
+        "predictions": {
+          "0.0": {
+            "predicted": "Charles",
+            "correct": false
+          },
+          "0.1": {
+            "predicted": "Charles",
+            "correct": false
+          },
+          "0.2": {
+            "predicted": "Charles",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "Charles",
+            "correct": false
+          },
+          "0.4": {
+            "predicted": "Charles",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "Darwin",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Darwin",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Darwin",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Darwin",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Darwin",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Darwin",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The chemical symbol for gold is",
+        "answer": "Au",
+        "predictions": {
+          "0.0": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.1": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Au",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Au",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "Water is made of hydrogen and",
+        "answer": "oxygen",
+        "predictions": {
+          "0.0": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.1": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "oxygen",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "oxygen",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The Berlin Wall fell in",
+        "answer": "1989",
+        "predictions": {
+          "0.0": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.1": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "1989",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "1989",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "Hamlet was written by",
+        "answer": "Shakespeare",
+        "predictions": {
+          "0.0": {
+            "predicted": "William",
+            "correct": false
+          },
+          "0.1": {
+            "predicted": "William",
+            "correct": false
+          },
+          "0.2": {
+            "predicted": "William",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Shakespeare",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Shakespeare",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The Mona Lisa was painted by",
+        "answer": "Leonardo",
+        "predictions": {
+          "0.0": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.1": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.2": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.3": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.4": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.5": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.6": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.7": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.8": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "0.9": {
+            "predicted": "Leonardo",
+            "correct": true
+          },
+          "1.0": {
+            "predicted": "Leonardo",
+            "correct": true
+          }
+        }
+      },
+      {
+        "prompt": "The Ninth Symphony was composed by",
+        "answer": "Beethoven",
+        "predictions": {
+          "0.0": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.1": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.2": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.3": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.4": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.5": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.6": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.7": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.8": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "0.9": {
+            "predicted": "Richard",
+            "correct": false
+          },
+          "1.0": {
+            "predicted": "Richard",
+            "correct": false
+          }
+        }
+      }
+    ]
+  }
+}
