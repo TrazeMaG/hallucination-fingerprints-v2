@@ -1,0 +1,162 @@
+%% NeurIPS 2026 style file
+%% Based on the official NeurIPS format specification
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_2026}[2026/01/01 NeurIPS 2026 style]
+
+\DeclareOption{preprint}{\@preprinttrue}
+\DeclareOption{final}{\@preprintfalse}
+\DeclareOption{nonatbib}{\@nonatbibtrue}
+\newif\if@preprint
+\newif\if@nonatbib
+\@preprintfalse
+\@nonatbibfalse
+\ProcessOptions\relax
+
+\if@nonatbib\else
+  \RequirePackage{natbib}
+\fi
+
+\RequirePackage{times}
+\RequirePackage{helvet}
+\RequirePackage{courier}
+\RequirePackage{url}
+\RequirePackage{microtype}
+
+%% Page layout — NeurIPS uses US letter, specific margins
+\setlength{\paperheight}{11in}
+\setlength{\paperwidth}{8.5in}
+
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{5.5in}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\evensidemargin}{0.5in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{25pt}
+
+%% NeurIPS uses 10pt type
+\renewcommand{\normalsize}{%
+  \@setfontsize\normalsize{10pt}{12pt}%
+  \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+  \abovedisplayshortskip \z@ \@plus3\p@
+  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+  \belowdisplayskip \abovedisplayskip
+  \let\@listi\@listI}
+\normalsize
+
+%% Section formatting
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}{-2ex \@plus -1ex \@minus -.2ex}%
+  {1ex \@plus .2ex}{\large\bf}}
+
+\renewcommand{\subsection}{%
+  \@startsection{subsection}{2}{\z@}{-1.8ex \@plus -0.5ex \@minus -.2ex}%
+  {0.8ex \@plus .2ex}{\normalsize\bf}}
+
+\renewcommand{\subsubsection}{%
+  \@startsection{subsubsection}{3}{\z@}{-1.5ex \@plus -0.5ex \@minus -.2ex}%
+  {0.5ex \@plus .2ex}{\normalsize\bf}}
+
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}{\z@}{1.25ex \@plus1ex \@minus.2ex}%
+  {-1em}{\normalsize\bf}}
+
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{\z@}{1.25ex \@plus1ex \@minus.2ex}%
+  {-1em}{\normalsize\it}}
+
+%% Title and author formatting
+\newcommand{\@toptitlebar}{%
+  \hrule height 4\p@
+  \vskip 0.25in
+  \vskip -\parskip
+}
+
+\newcommand{\@bottomtitlebar}{%
+  \vskip 0.29in
+  \vskip -\parskip
+  \hrule height 1\p@
+  \vskip 0.09in
+}
+
+\renewcommand{\maketitle}{%
+  \par
+  \begingroup
+    \renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+    \def\@makefnmark{\hbox{$^{\@thefnmark}$}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+      \hbox to1.8em{\hss$^{\@thefnmark}$}##1}%
+    \@maketitle
+  \endgroup
+  \@thanks
+  \setcounter{footnote}{0}
+  \let\@thanks\@empty
+  \let\@maketitle\relax
+  \let\maketitle\relax
+}
+
+\def\@maketitle{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \vskip 0.1in
+    \@toptitlebar
+    \centering
+    {\LARGE\bf \@title\par}
+    \@bottomtitlebar
+    \if@preprint
+      \begin{center}
+        \Large\it Preprint. Under review.
+      \end{center}
+    \fi
+    \vskip 0.2in \@plus 2\p@
+    {\large
+      \lineskip .75em
+      \begin{tabular}[t]{c}
+        \@author
+      \end{tabular}
+      \par}
+    \vskip 1.5ex
+  }
+}
+
+%% Abstract
+\renewenvironment{abstract}{%
+  \centerline{\large\bf Abstract}%
+  \vspace{0.5ex}%
+  \begin{quote}}
+  {\end{quote}\par}
+
+%% Acknowledgements
+\newenvironment{ack}{%
+  \section*{Acknowledgments and Disclosure of Funding}}{}
+
+%% Figure and table captions
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\small\bf #1: \small #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\small\bf #1: \small #2\par}
+  \else
+    \global\@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+%% Compact itemize and enumerate
+\renewenvironment{itemize}{\begin{list}{$\bullet$}{%
+  \topsep 0pt\parsep 0pt\partopsep 0pt\itemsep 0pt\leftmargin 1.5em}}
+  {\end{list}}
+
+\renewenvironment{enumerate}{\begin{list}{\arabic{enumi}.}{%
+  \usecounter{enumi}%
+  \topsep 0pt\parsep 0pt\partopsep 0pt\itemsep 0pt\leftmargin 1.5em}}
+  {\end{list}}
+
+%% Bibliography
+\bibpunct{[}{]}{,}{n}{}{,}
+\bibliographystyle{abbrvnat}
+\renewcommand{\bibfont}{\small}
+
+\endinput

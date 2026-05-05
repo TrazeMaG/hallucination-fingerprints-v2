@@ -1,0 +1,89 @@
+\relax 
+\providecommand\zref@newlabel[2]{}
+\bibstyle{abbrvnat}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{nostalgebraist2020logitlens}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{nostalgebraist2020logitlens}
+\citation{belrose2023eliciting}
+\citation{elhage2021mathematical}
+\citation{meng2022locating}
+\citation{ji2023survey}
+\citation{lin2022truthfulqa}
+\citation{manakul2023selfcheckgpt}
+\citation{petroni2019language}
+\citation{geva2021transformer}
+\citation{li2023inference}
+\@writefile{toc}{\contentsline {paragraph}{Why this matters.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mechanistic interpretability.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Hallucination.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Knowledge in transformers.}{2}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Inference-time interventions.}{2}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Background}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Residual stream and logit lens.}{2}{section*.6}\protected@file@percent }
+\newlabel{eq:logitlens}{{1}{2}{Residual stream and logit lens}{equation.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Suppression ratio.}{2}{section*.7}\protected@file@percent }
+\newlabel{eq:rho}{{2}{2}{Suppression ratio}{equation.2}{}}
+\citation{nanda2022transformerlens}
+\@writefile{toc}{\contentsline {paragraph}{Logit blending intervention.}{3}{section*.8}\protected@file@percent }
+\newlabel{eq:blend}{{3}{3}{Logit blending intervention}{equation.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methodology}{3}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Models.}{3}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Hallucination taxonomy.}{3}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{HallBench~v2.}{3}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experiments}{3}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Scaling Law in the GPT-2 Family}{3}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Last-Layer Suppression in GPT-2~XL for the prompt \emph  {``The capital of France is''}. The correct answer ``Paris'' peaks at 85.78\% probability at block~41 before collapsing at the final layer ($\rho = 20.8\times $). The model \emph  {knew} the correct answer---the final layer suppressed it.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:suppression}{{1}{3}{Last-Layer Suppression in GPT-2~XL for the prompt \emph {``The capital of France is''}. The correct answer ``Paris'' peaks at 85.78\% probability at block~41 before collapsing at the final layer ($\rho = 20.8\times $). The model \emph {knew} the correct answer---the final layer suppressed it}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Scaling laws in the GPT-2 family across 124M--1.5B parameters. Left: suppression ratio increases monotonically ($2.4\times $ to $20.8\times $). Centre: Type~2a rate increases (10\% to 50\%). Right: peak factual depth converges to a universal constant $\approx 0.83$ regardless of scale.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:scaling}{{2}{4}{Scaling laws in the GPT-2 family across 124M--1.5B parameters. Left: suppression ratio increases monotonically ($2.4\times $ to $20.8\times $). Centre: Type~2a rate increases (10\% to 50\%). Right: peak factual depth converges to a universal constant $\approx 0.83$ regardless of scale}{figure.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces LLS scales with model size in the GPT-2 family. Suppression ratio and Type~2a rate increase monotonically; peak depth converges to $\approx 0.83$.}}{4}{table.1}\protected@file@percent }
+\newlabel{tab:scaling}{{1}{4}{LLS scales with model size in the GPT-2 family. Suppression ratio and Type~2a rate increase monotonically; peak depth converges to $\approx 0.83$}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Two distinct hallucination families across 10 models and 5 architecture families. Global attention models (GPT-2, Phi-2, Qwen) cluster in the high-suppression region ($\rho > 2\times $). Local/rotary attention models (GPT-Neo, Pythia) cluster near $\rho \approx 1.0$ regardless of scale. Suppression ratio predicts intervention effectiveness ($r = 0.91$, $p < 0.001$).}}{4}{figure.3}\protected@file@percent }
+\newlabel{fig:families}{{3}{4}{Two distinct hallucination families across 10 models and 5 architecture families. Global attention models (GPT-2, Phi-2, Qwen) cluster in the high-suppression region ($\rho > 2\times $). Local/rotary attention models (GPT-Neo, Pythia) cluster near $\rho \approx 1.0$ regardless of scale. Suppression ratio predicts intervention effectiveness ($r = 0.91$, $p < 0.001$)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Cross-Architecture Comparison}{5}{subsection.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Cross-architecture results across 10 models. Architecture determines hallucination profile. Suppression ratio predicts intervention effectiveness ($r=0.91$, $p<0.001$). Strong family (upper block); weak family (lower block).}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:families}{{2}{5}{Cross-architecture results across 10 models. Architecture determines hallucination profile. Suppression ratio predicts intervention effectiveness ($r=0.91$, $p<0.001$). Strong family (upper block); weak family (lower block)}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Causal Proof via Activation Patching}{5}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Self-patching on GPT-2~XL. Injecting peak-layer activations into the final layer restores correct predictions in all 8~tested cases. Mean probability increase $+0.774$.}}{5}{table.3}\protected@file@percent }
+\newlabel{tab:patching}{{3}{5}{Self-patching on GPT-2~XL. Injecting peak-layer activations into the final layer restores correct predictions in all 8~tested cases. Mean probability increase $+0.774$}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Logit Blending Intervention and Failure Profile}{5}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Failure profile.}{6}{section*.12}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Logit blending results. Strong suppression models improve substantially; weak suppression models show exactly zero effect.}}{6}{table.4}\protected@file@percent }
+\newlabel{tab:intervention}{{4}{6}{Logit blending results. Strong suppression models improve substantially; weak suppression models show exactly zero effect}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Structural Diversity Validation (484 Prompts)}{6}{subsection.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces LLS across 4 prompt structures (484 prompts, 121 facts, 10 categories, 3 tiers). GPT-2 XL shows elevated $\rho $ across all structures; GPT-Neo shows near-unity $\rho $ across all structures.}}{6}{table.5}\protected@file@percent }
+\newlabel{tab:structures}{{5}{6}{LLS across 4 prompt structures (484 prompts, 121 facts, 10 categories, 3 tiers). GPT-2 XL shows elevated $\rho $ across all structures; GPT-Neo shows near-unity $\rho $ across all structures}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}HallBench~v2: Tiered Evaluation}{6}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Closed Model Probing and Cross-Lingual Finding}{6}{subsection.5.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Gemini~2.5 Flash.}{6}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Cross-lingual knowledge representation.}{6}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}The \textsc  {HallScope} Library}{6}{section.6}\protected@file@percent }
+\citation{meng2022locating}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces HallBench~v2 results across 3 tiers. Tier~1 (high suppression facts: capitals, science) shows the largest intervention gains (GPT-2~XL: $36\% \to 80\%$). Critically, Tier~3 (knowledge gap) shows \emph  {zero} improvement across all models at all $\alpha $ values---the intervention never hallucinates new answers. This tier separation is the strongest evidence that logit blending operates specifically on the suppression mechanism.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:hallbench}{{4}{7}{HallBench~v2 results across 3 tiers. Tier~1 (high suppression facts: capitals, science) shows the largest intervention gains (GPT-2~XL: $36\% \to 80\%$). Critically, Tier~3 (knowledge gap) shows \emph {zero} improvement across all models at all $\alpha $ values---the intervention never hallucinates new answers. This tier separation is the strongest evidence that logit blending operates specifically on the suppression mechanism}{figure.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{7}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why does suppression occur?}{7}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The 0.83 constant.}{7}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Type~2a vs Type~2b diagnostics.}{7}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implications for knowledge editing.}{7}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Limitations}{7}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{8}{section.9}\protected@file@percent }
+\newlabel{nostalgebraist2020logitlens}{{{{[1]}}}{8}{References}{Item.7}{}}
+\newlabel{belrose2023eliciting}{{{{[2]}}}{8}{References}{Item.8}{}}
+\newlabel{elhage2021mathematical}{{{{[3]}}}{8}{References}{Item.9}{}}
+\newlabel{meng2022locating}{{{{[4]}}}{8}{References}{Item.10}{}}
+\newlabel{nanda2022transformerlens}{{{{[5]}}}{8}{References}{Item.11}{}}
+\newlabel{ji2023survey}{{{{[6]}}}{8}{References}{Item.12}{}}
+\newlabel{lin2022truthfulqa}{{{{[7]}}}{8}{References}{Item.13}{}}
+\newlabel{manakul2023selfcheckgpt}{{{{[8]}}}{8}{References}{Item.14}{}}
+\newlabel{kadavath2022language}{{{{[9]}}}{8}{References}{Item.15}{}}
+\newlabel{petroni2019language}{{{{[10]}}}{8}{References}{Item.16}{}}
+\newlabel{geva2021transformer}{{{{[11]}}}{8}{References}{Item.17}{}}
+\newlabel{li2023inference}{{{{[12]}}}{8}{References}{Item.18}{}}
+\newlabel{zou2023representation}{{{{[13]}}}{8}{References}{Item.19}{}}
+\newlabel{hernandez2023linearity}{{{{[14]}}}{8}{References}{Item.20}{}}
+\gdef \@abspage@last{8}
