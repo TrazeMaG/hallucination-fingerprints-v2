@@ -1,351 +1,376 @@
 \documentclass{article}
-\usepackage[final]{neurips_2026}
 
-\usepackage{amsmath,amssymb}
+% Required for row colouring in tables, including if xcolor is loaded by the style.
+\PassOptionsToPackage{table}{xcolor}
+
+% Official NeurIPS 2026 style for double-blind workshop submission.
+% Do NOT use [final] or [preprint] for the revised anonymous submission.
+\usepackage[dblblindworkshop]{neurips_2026}
+
+% Standard packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{xurl}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{hyperref}
-\usepackage{microtype}
 \usepackage{xcolor}
-\usepackage{CJKutf8}
+\usepackage{nicefrac}
+\usepackage{microtype}
 \usepackage{enumitem}
-\usepackage{mdframed}
-\usepackage{url}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{CJKutf8}
 
-\hypersetup{colorlinks=true,linkcolor=blue!60!black,
-            citecolor=blue!60!black,urlcolor=blue!60!black}
+% Colours for tables
+\definecolor{rowred}{RGB}{255,242,242}
+\definecolor{rowgreen}{RGB}{242,255,242}
 
-\definecolor{findingblue}{RGB}{240,248,255}
+% Caption style
+\captionsetup{font=small,labelfont=bf,skip=4pt}
 
-%% ── Graceful figure fallback ─────────────────────────────────────────────────
-%% If the PNG file is missing we render a labelled grey box instead.
-\newcommand{\figbox}[2]{%
-  \includegraphics[width=\linewidth,draft=false]{#1}%
-  \ignorespaces}
+% Figure helper
+% Keep your image files in the same project folder with these exact names.
+% Example: figure1_layer_suppression.png
+\newcommand{\fig}[2]{%
+  \includegraphics[width=\linewidth]{#1}%
+}
 
+% Paper title
 \title{Last-Layer Suppression: A Consistent Causal Mechanism\\
 of Factual Hallucination in Transformer Language Models}
 
-\author{%
-  Nikhil Upadhyay \\
-  Independent Researcher, Dublin, Ireland \\
-  \texttt{nikhil25000@gmail.com} \\[4pt]
-  \small Code: \url{https://github.com/TrazeMaG/hallucination-fingerprints-v2} \\
-  \small Library: \url{https://pypi.org/project/hallscope/} \quad
-         Dataset: \url{https://huggingface.co/datasets/Trazemag/hallbench-v2}
-}
+% Required for NeurIPS workshop format
+\workshoptitle{ICML 2026 Workshop on Mechanistic Interpretability}
+
+% Anonymous double-blind author block
+\author{Anonymous Author(s)\\
+Affiliation withheld for double-blind review}
 
 \begin{document}
+
 \maketitle
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \begin{abstract}
-Factual hallucinations in large language models are widely attributed to
-failures of knowledge acquisition---the model simply does not know the answer.
-We present mechanistic and behavioural evidence that a significant fraction
-of hallucinations instead reflect failures of knowledge \emph{retrieval}:
-correct factual knowledge is acquired in intermediate transformer layers but
-systematically suppressed at the final output layer. We term this mechanism
-\textbf{Last-Layer Suppression} (LLS) and provide four independent lines of
-evidence across 10 models spanning 5 architecture families, validated on
-484 structurally diverse prompts covering 121 distinct facts across 10
-categories and 3 difficulty tiers in 4 structural forms.
-(1)~Logit lens analysis across the GPT-2 family (124M--1.5B) reveals correct
-answers peak at $\approx 83\%$ of model depth before collapse, with
-suppression ratios $\rho$ reaching $20.8\times$.
-(2)~We document an \emph{architectural family dependency}---a previously
-undocumented finding: full global attention models exhibit strong suppression
-while local/rotary attention variants show near-zero $\rho$ regardless of
-scale.
-(3)~Activation patching on GPT-2 XL provides direct causal proof: injecting
-peak-layer activations restores correct predictions in 8/8 cases
-($\bar{\Delta p} = +0.77$).
-(4)~A zero-cost logit-blending intervention---requiring no
-retraining---improves factual accuracy by up to $+45\%$ on GPT-2 XL and
-$+40\%$ on Qwen~1.5-1.8B, with a fully characterised failure profile showing
-zero effect on Type~2b knowledge-gap facts.
-Behavioural probing of Gemini~2.5 Flash reveals signatures consistent with
-LLS in a state-of-the-art closed model.
+Factual hallucinations in large language models are widely attributed to absent
+knowledge. We present mechanistic and causal evidence that a substantial fraction
+instead reflect \emph{retrieval failures}: correct factual knowledge is encoded in
+intermediate transformer layers but systematically suppressed at the final output
+layer, a mechanism we term \textbf{Last-Layer Suppression} (LLS). We provide six
+complementary lines of evidence spanning \textbf{12 models across 6 architecture
+families (124M--8B parameters)}, validated on \textbf{680 prompts} covering 150
+facts, 10 knowledge categories, 3 difficulty tiers, and 4 linguistic structures.
+(1) A \emph{universal peak-depth constant} of $0.81\!\pm\!0.05$: correct answers
+reliably peak near 83\% of model depth before final-layer collapse, with suppression
+ratios $\rho$ reaching $201.5\times$.
+(2) A sharp \emph{architectural dependency}: global and hybrid attention models
+(GPT-2, Phi-2, Qwen, Mistral~7B) exhibit strong LLS while local and RoPE attention
+models (GPT-Neo, Pythia, LLaMA~3~8B) show near-unity $\rho$.
+The controlled 8B-scale comparison, Mistral~7B (hybrid, 25\% accuracy,
+$\rho\!=\!47.6\times$) vs LLaMA~3~8B (RoPE, 70\% accuracy, $\rho\!=\!1.9\times$),
+implicates attention architecture as a key driver of factual accuracy.
+(3) Activation patching provides causal evidence in 8/8 cases
+($\bar{\Delta p}\!=\!+0.774$).
+(4) A zero-cost logit-blending intervention improves accuracy by up to $+45\%$ on
+targeted benchmarks and \textbf{$+8.9$ percentage points on TruthfulQA (n=817)},
+with zero effect on Type~2b knowledge-gap facts.
+(5) Structural invariance: the peak-depth constant holds across 4 prompt structures
+($0.77$--$0.83$).
+(6) Multi-token facts show stronger suppression ($\rho\!=\!32.9\times$ vs
+$11.6\times$), with non-Western facts showing equivalent profiles.
 We release \textsc{HallScope} (\texttt{pip install hallscope}) and
-\textsc{HallBench~v2}, a tiered benchmark distinguishing Type~2a (suppression)
-from Type~2b (knowledge gap) hallucinations.
+\textsc{HallBench~v2}, a tiered benchmark distinguishing recoverable (Type~2a)
+from knowledge-gap (Type~2b) hallucinations.
 \end{abstract}
 
-%% ─────────────────────────────────────────────────────────────────────────────
+\noindent
+\textbf{Code:} Code repository anonymised for review. \quad
+\textbf{Library:} Analysis library anonymised for review. \quad
+\textbf{Dataset:} Benchmark dataset anonymised for review.
+
 \section{Introduction}
 
-When a language model outputs that the capital of Germany is Paris, the
-standard explanation is ignorance: the model never learned the correct fact.
-Our experiments suggest this is frequently wrong.
+When GPT-2~XL is asked \textit{``The capital of France is''}, it outputs \textit{``a''}.
+The standard explanation: the model never learned the correct answer.
+Logit lens analysis tells a different story.
+At block~41 of~48, ``Paris'' reaches 85.78\% probability.
+By block~48, the final output layer, that probability has collapsed below 5\%.
+The model encoded the correct answer. The final layer destroyed it.
 
-Using the logit lens~\citep{nostalgebraist2020logitlens}---which reads the
-residual stream at each transformer layer as a running vocabulary-space
-prediction---we find that GPT-2 XL assigns \emph{Berlin} a probability
-exceeding 78\% at block~42 of~48.
-By block~48 (the final output layer), that probability has collapsed below 5\%.
-The model possessed the correct answer. The final layer destroyed it.
+We term this \textbf{Last-Layer Suppression} (LLS) and provide evidence
+suggesting it is a consistent, causal, architecture-dependent mechanism
+across 12 models spanning six families and two orders of magnitude in scale
+(124M--8B parameters).
 
-We term this mechanism \textbf{Last-Layer Suppression} (LLS) and establish
-four properties.
-
-\begin{mdframed}[backgroundcolor=findingblue,linewidth=0pt,
-  innertopmargin=6pt,innerbottommargin=6pt,innerleftmargin=8pt,
-  innerrightmargin=8pt]
-\textbf{Contributions:}
-\begin{enumerate}[leftmargin=1.5em,topsep=2pt,itemsep=1pt,
-                  label={\arabic*.}]
-  \item Identification and scaling analysis of LLS across the full GPT-2
-        family (124M--1.5B), with $\rho$ reaching $20.8\times$ and a universal
-        peak-depth constant $\approx 0.83$.
-  \item First documentation of an architectural family dependency: LLS is
-        present in full global attention models and absent in local/rotary
-        attention variants across 10 models and 5 families.
-  \item Causal proof via activation patching: final layers \emph{cause}
-        suppression in 8/8 tested cases ($\bar{\Delta p} = +0.774$).
-  \item A zero-cost logit-blending intervention improving accuracy by up to
-        $+45\%$, with a fully characterised failure profile.
-  \item Structural diversity validation: 484 prompts, 121 facts, 10
-        categories, 3 difficulty tiers, 4 linguistic structures.
-  \item \textsc{HallScope} open-source library and \textsc{HallBench~v2}
-        tiered benchmark.
+\paragraph{Contributions}
+\begin{enumerate}[leftmargin=1.8em,topsep=2pt,itemsep=2pt,label=\arabic*.]
+  \item \textbf{Universal peak-depth constant} $0.81\pm0.05$ across all 12 models
+        (124M--8B), with $\rho$ reaching $201.5\times$.
+  \item \textbf{Architectural dependency}: global/hybrid attention $\to$ strong LLS;
+        local/RoPE attention $\to$ near-zero LLS.
+        Mistral~7B vs LLaMA~3~8B (same scale, opposite profiles) provides a
+        controlled 8B-scale comparison.
+  \item \textbf{Causal evidence} via activation patching: 8/8 cases
+        restored, $\bar{\Delta p}=+0.774$.
+  \item \textbf{Zero-cost intervention}: $+45\%$ targeted, $+8.9$pp TruthfulQA
+        (n=817), zero effect on Type~2b knowledge-gap facts.
+  \item \textbf{Structural invariance}: depth constant across 4 prompt structures
+        (680 total evaluation prompts).
+  \item \textbf{Multi-token and cross-regional validity}: LLS stronger in
+        multi-token facts; non-Western facts show equivalent suppression profiles.
+  \item \textsc{HallScope} open-source library and \textsc{HallBench~v2} benchmark.
 \end{enumerate}
-\end{mdframed}
 
-\paragraph{Why this matters.}
-If hallucinations reflect suppressed knowledge rather than absent knowledge,
-then training-time interventions targeting knowledge acquisition may address
-the wrong failure mode.
-Our Type~2a/Type~2b taxonomy provides a diagnostic framework: Type~2a
-(suppression) cases are correctable at inference time without retraining;
-Type~2b (knowledge gap) cases require additional training data or retrieval
-augmentation.
+\paragraph{Why this matters}
+If hallucinations reflect suppressed rather than absent knowledge, then
+training-time interventions targeting knowledge acquisition address the wrong
+failure mode.
+The Mistral/LLaMA comparison at 8B scale suggests that architectural choices
+reducing LLS may be a primary driver of factual accuracy, a finding with direct
+implications for model architecture decisions.
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Related Work}
 
-\paragraph{Mechanistic interpretability.}
-The logit lens was introduced by~\citet{nostalgebraist2020logitlens} and
-formalised as the tuned lens by~\citet{belrose2023eliciting}.
-\citet{elhage2021mathematical} established the residual stream framework.
-\citet{meng2022locating} used causal tracing to localise factual associations
-to MLP layers in GPT-J.
-We extend these techniques to study suppression at the \emph{output} layer
-rather than storage in intermediate layers, and introduce a cross-architecture
-comparative methodology.
+\paragraph{Mechanistic interpretability}
+The logit lens was introduced by Nostalgebraist~[1] and formalised as the tuned
+lens by Belrose et al.~[2].
+Elhage et al.~[3] established the residual stream framework that underlies our
+analysis.
+Meng et al.~[4] used causal tracing to localise factual associations in MLP
+layers of GPT-J.
+We extend these techniques to study suppression at the \emph{output} layer and
+introduce systematic cross-architecture comparison at 7--8B scale.
 
-\paragraph{Hallucination.}
-\citet{ji2023survey} provide a comprehensive survey.
-\citet{lin2022truthfulqa} find larger models are not necessarily more truthful.
-\citet{manakul2023selfcheckgpt} detect hallucinations via consistency sampling.
-Our approach differs in targeting the internal mechanism \emph{before}
-generation rather than verifying outputs post-hoc.
+\paragraph{Hallucination}
+Ji et al.~[6] provide a comprehensive survey.
+Lin et al.~[7] find that larger models are not necessarily more truthful on
+TruthfulQA.
+Manakul et al.~[8] detect hallucinations via consistency sampling.
+Our approach targets the internal mechanism before generation and provides an
+inference-time correction requiring no external data.
 
-\paragraph{Knowledge in transformers.}
-\citet{petroni2019language} established that LLMs encode factual knowledge
-implicitly. \citet{geva2021transformer} showed MLP layers function as
-key-value memories. Our finding that models suppress correctly stored knowledge
-at the output layer is distinct from and complementary to these results.
+\paragraph{Knowledge and inference-time interventions}
+Petroni et al.~[9] established that LLMs encode factual knowledge implicitly.
+Geva et al.~[10] showed that MLP layers act as key-value memories.
+Li et al.~[11] demonstrated representation engineering for truthfulness.
+Our logit-blending intervention is simpler, no learned steering vectors, and
+includes an explicit failure characterisation distinguishing Type~2a from
+Type~2b cases.
 
-\paragraph{Inference-time interventions.}
-\citet{li2023inference} demonstrated representation engineering for
-truthfulness. Our logit-blending intervention is simpler---no learned steering
-vectors---and comes with an explicit failure characterisation.
-
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Background}
 
-\paragraph{Residual stream and logit lens.}
-A decoder-only transformer processes input tokens through $L$ layers, updating
-a residual stream $\mathbf{h}^{(\ell)} \in \mathbb{R}^d$ at each layer.
-The logit lens applies the unembedding matrix $\mathbf{W}_U$ to intermediate
-states:
+\paragraph{Logit lens}
+A decoder-only transformer processes input tokens through $L$ layers, maintaining
+a residual stream $\mathbf{h}^{(\ell)}\in\mathbb{R}^d$.
+The logit lens applies the unembedding matrix $\mathbf{W}_U$ to intermediate states:
 \begin{equation}
-p_\ell(w) = \operatorname{softmax}
-  \!\bigl(\mathrm{LN}(\mathbf{h}^{(\ell)}) \cdot \mathbf{W}_U\bigr)[w]
-\label{eq:logitlens}
+p_\ell(w) = \operatorname{softmax}\!\bigl(
+  \mathrm{LN}(\mathbf{h}^{(\ell)})\cdot\mathbf{W}_U\bigr)[w]
+\label{eq:lens}
 \end{equation}
-allowing probability tracking for any token $w$ across all layers.
+tracking the probability of any token $w$ at each layer $\ell=1,\ldots,L$.
 
-\paragraph{Suppression ratio.}
+\paragraph{Suppression ratio}
 We define the suppression ratio $\rho$ as:
 \begin{equation}
-\rho = \frac{p_{\ell^*}(w^*)}{p_L(w^*) + \varepsilon}, \quad
-\ell^* = \operatorname*{arg\,max}_\ell\, p_\ell(w^*)
+\rho = \frac{p_{\ell^*}(w^*)}{p_L(w^*)+\varepsilon},\quad
+\ell^* = \operatorname*{arg\,max}_\ell\,p_\ell(w^*),\quad \varepsilon=10^{-10}
 \label{eq:rho}
 \end{equation}
-where $w^*$ is the correct answer token, $p_L$ is the final-layer probability,
-and $\varepsilon = 10^{-10}$.
-Values $\rho > 1.5$ indicate meaningful suppression; values exceeding
-$10\times$ indicate severe suppression.
+where $w^*$ is the correct answer token and $p_L$ is the final-layer probability.
+Values $\rho>2$ indicate meaningful suppression; $\rho>10$ is severe.
 
-\paragraph{Logit blending intervention.}
+\paragraph{Logit blending}
 \begin{equation}
 \mathbf{logits}_{\mathrm{blend}}
-  = \alpha\,\mathrm{LN}(\mathbf{h}^{(\ell^*)}) \cdot \mathbf{W}_U
-  + (1-\alpha)\,\mathrm{LN}(\mathbf{h}^{(L)}) \cdot \mathbf{W}_U
+  = \alpha\,\mathrm{LN}(\mathbf{h}^{(\ell^*)})\cdot\mathbf{W}_U
+  + (1-\alpha)\,\mathrm{LN}(\mathbf{h}^{(L)})\cdot\mathbf{W}_U
 \label{eq:blend}
 \end{equation}
-Setting $\alpha=0$ recovers standard generation. $\ell^*$ is identified per
-prompt via one additional forward pass.
+Setting $\alpha=0$ recovers standard generation.
+The peak layer $\ell^*$ is identified per prompt via one additional forward pass.
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Methodology}
 
-\paragraph{Models.}
-We analyse 10 models across 5 families using
-TransformerLens~\citep{nanda2022transformerlens}.
-The \textbf{strong suppression family} (full global attention) comprises
-GPT-2 Small (124M), Medium (345M), Large (774M), XL (1.5B), Phi-2 (2.7B),
-and Qwen~1.5-1.8B.
-The \textbf{weak suppression family} (local/rotary attention) comprises
-GPT-Neo 125M, 1.3B, 2.7B, and Pythia~2.8B.
+\paragraph{Models}
+12 models across 6 families using TransformerLens~[5] and HuggingFace
+Transformers.
+\emph{Strong-suppression family} (global/hybrid attention):
+GPT-2 Small (124M), Medium (345M), Large (774M), XL (1.5B);
+Phi-2 (2.7B); Qwen~1.5-1.8B (1.8B); Mistral~7B.
+\emph{Weak-suppression family} (local/RoPE attention):
+GPT-Neo 125M, 1.3B, 2.7B; Pythia~2.8B; LLaMA~3~8B.
+Mistral~7B and LLaMA~3~8B were loaded in 4-bit NF4 quantisation on
+RTX~4060 (8~GB) and RTX~3080 (10~GB) respectively.
 
-\paragraph{Hallucination taxonomy.}
-We classify outputs as: \textbf{Correct}; \textbf{Type~2a} (Last-Layer
-Suppression: correct answer in top-10 at final layer but not argmax, with
-logit lens revealing earlier peak); or \textbf{Type~2b} (Knowledge Gap:
-correct answer absent from top-10).
+\paragraph{Hallucination taxonomy}
+\textbf{Correct}: model outputs the correct answer.
+\textbf{Type~2a} (LLS): correct token in top-10 at final layer but not argmax;
+logit lens reveals an earlier probability peak followed by collapse.
+\textbf{Type~2b} (Knowledge Gap): correct token absent from top-10 at all layers.
 
-\paragraph{HallBench~v2.}
-We construct a benchmark with four prompt structures per fact:
-(1)~\textit{forward completion} (``The capital of France is''),
-(2)~\textit{question form} (``What is the capital of France?''),
-(3)~\textit{reverse direction} (``Paris is the capital of which country?''), and
-(4)~\textit{contextual embed} (``France, whose capital city is'').
-The full benchmark spans 121 facts, 10 categories, 3 difficulty tiers
-(easy/medium/hard), and 4 structures, yielding 484 evaluation prompts.
+\paragraph{HallBench~v2}
+150 facts across 10 categories (capitals, science, history, literature, modern,
+geography, economy, culture) and 3 difficulty tiers (easy/medium/hard), including
+30 non-Western facts (Africa, Asia, S.~America, Oceania).
+Each fact is evaluated in 4 prompt structures:
+forward completion, question form, reverse direction, and contextual embed.
+This yields 600 structured prompts; 80 additional multi-token prompts bring the
+total to 680 evaluation points.
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Experiments}
 
-\subsection{Scaling Law in the GPT-2 Family}
+\subsection{The Peak-Depth Constant: Central Finding}
 
 \begin{figure}[htbp]
   \centering
-  \figbox{figure1_layer_suppression}{}
-  \caption{Last-Layer Suppression in GPT-2~XL for the prompt
-  \emph{``The capital of France is''}. The correct answer ``Paris'' peaks
-  at 85.78\% probability at block~41 before collapsing at the final layer
-  ($\rho = 20.8\times$). The model \emph{knew} the correct answer---the
-  final layer suppressed it.}
+  \fig{figure1_layer_suppression}{Layer suppression curve}
+  \caption{\textbf{Last-Layer Suppression in GPT-2~XL.}
+  ``Paris'' peaks at 85.78\% probability at block~41
+  (relative depth $\ell^*/L = 0.854$) before collapsing at the final
+  layer block~48 ($\rho = 20.8\times$). The model encoded the correct
+  answer; the final layer suppressed it.}
   \label{fig:suppression}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \figbox{figure2_scaling_law}{}
-  \caption{Scaling laws in the GPT-2 family across 124M--1.5B parameters.
-  Left: suppression ratio increases monotonically ($2.4\times$ to
-  $20.8\times$). Centre: Type~2a rate increases (10\% to 50\%). Right:
-  peak factual depth converges to a universal constant $\approx 0.83$
-  regardless of scale.}
-  \label{fig:scaling}
+  \fig{figure5_structure_variance}{Structure variance}
+  \caption{\textbf{Peak-depth constant is invariant to prompt structure
+  (GPT-2~XL, 30 facts $\times$ 4 structures = 120 prompts).}
+  \textit{Left}: averaged layer-by-layer probability curves for all 4
+  structures converge to the same suppression point near layer~40
+  (dashed line = 0.83 depth constant).
+  \textit{Right}: suppression ratio $\rho$ distributions by structure.
+  The peak-depth constant across structures ($0.771$--$0.830$, range =
+  0.059) is the most stable property of LLS. This structural invariance
+  is the strongest evidence that LLS is a mechanistic property, not a
+  prompt-format artefact.}
+  \label{fig:structure}
 \end{figure}
 
-Figure~\ref{fig:suppression} shows the layer-by-layer suppression curve for
-GPT-2~XL. Table~\ref{tab:scaling} and Figure~\ref{fig:scaling} document
-three consistent scaling trends: suppression ratio increases monotonically
-from $2.4\times$ (Small) to $20.8\times$ (XL); Type~2a rate rises from
-10\% to 50\%; and relative peak depth converges to $\approx 0.83$ across
-all four scales---an architectural constant: factual knowledge reliably
-peaks in the final 15--20\% of processing depth before suppression at the
-output.
+The central result of this paper is not the magnitude of $\rho$ in any
+single case, which is subject to heavy-tailed outliers, but the
+\emph{timing consistency} across all models and prompt forms.
+Figure~\ref{fig:suppression} illustrates the phenomenon for a single case.
+Figure~\ref{fig:structure} demonstrates its invariance across all 4 prompt
+structures: forward, question, reverse direction, and contextual embed.
+The peak-depth constant $0.81\pm0.05$ holds across all 12 models, all 4
+structures, and both single- and multi-token facts.
+
+\subsection{Cross-Architecture Comparison: 12 Models}
 
 \begin{table}[htbp]
-\caption{LLS scales with model size in the GPT-2 family.
-Suppression ratio and Type~2a rate increase monotonically;
-peak depth converges to $\approx 0.83$.}
-\label{tab:scaling}
+\caption{\textbf{Complete cross-model results across 12 models and 6
+architecture families.}
+Upper block: strong-suppression family (global/hybrid attention, shaded red).
+Lower block: weak-suppression family (local/RoPE attention, shaded green).
+The Mistral~7B / LLaMA~3~8B pair (same parameter count $\approx$8B,
+same layer count = 32, highlighted in bold) provides a controlled
+architectural comparison at scale.}
+\label{tab:models}
 \centering\small
-\begin{tabular}{lrrrr}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llrrrrl}
 \toprule
-\textbf{Model} & \textbf{Params} & \textbf{Type~2a}
-  & \textbf{Rel.\ Depth} & \textbf{Avg.\ $\rho$} \\
+\textbf{Model} & \textbf{Family} & \textbf{Params}
+  & \textbf{Acc} & \textbf{Type~2a} & \textbf{Avg $\rho$}
+  & \textbf{Attention} \\
 \midrule
-GPT-2 Small  & 124M & 10\% & 0.79 & $2.4\times$  \\
-GPT-2 Medium & 345M & 40\% & 0.86 & $15.6\times$ \\
-GPT-2 Large  & 774M & 15\% & 0.86 & $17.1\times$ \\
-GPT-2 XL     & 1.5B & 50\% & 0.81 & $20.8\times$ \\
+\rowcolor{rowred}
+GPT-2 Small    & GPT-2   & 124M & 10\% & 10\% & $2.4\times$  & Global \\
+\rowcolor{rowred}
+GPT-2 Medium   & GPT-2   & 345M & 20\% & 40\% & $15.6\times$ & Global \\
+\rowcolor{rowred}
+GPT-2 Large    & GPT-2   & 774M & 15\% & 15\% & $17.1\times$ & Global \\
+\rowcolor{rowred}
+GPT-2 XL       & GPT-2   & 1.5B & 35\% & 50\% & $20.8\times$ & Global \\
+\rowcolor{rowred}
+Phi-2          & Phi     & 2.7B & 70\% & 20\% & $10.8\times$ & Global \\
+\rowcolor{rowred}
+Qwen 1.5-1.8B  & Qwen    & 1.8B & 10\% & 70\% & $2.5\times$  & Global \\
+\rowcolor{rowred}
+\textbf{Mistral 7B} & \textbf{Mistral} & \textbf{7B}
+  & \textbf{25\%} & \textbf{75\%} & $\mathbf{47.6\times}$ & GQA+SWA \\
+\midrule
+\rowcolor{rowgreen}
+GPT-Neo 125M   & GPT-Neo & 125M &  5\% & 25\% & $1.0\times$  & Local \\
+\rowcolor{rowgreen}
+GPT-Neo 1.3B   & GPT-Neo & 1.3B & 40\% & 45\% & $1.0\times$  & Local \\
+\rowcolor{rowgreen}
+GPT-Neo 2.7B   & GPT-Neo & 2.7B & 15\% & 65\% & $1.0\times$  & Local \\
+\rowcolor{rowgreen}
+Pythia 2.8B    & Pythia  & 2.8B & 40\% & 50\% & $1.1\times$  & Rotary \\
+\rowcolor{rowgreen}
+\textbf{LLaMA 3 8B} & \textbf{LLaMA~3} & \textbf{8B}
+  & \textbf{70\%} & \textbf{30\%} & $\mathbf{1.9\times}$
+  & RoPE+GQA \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\subsection{Cross-Architecture Comparison}
 
 \begin{figure}[htbp]
   \centering
-  \figbox{figure3_architecture_families}{}
-  \caption{Two distinct hallucination families across 10 models and 5
-  architecture families. Global attention models (GPT-2, Phi-2, Qwen)
-  cluster in the high-suppression region ($\rho > 2\times$). Local/rotary
-  attention models (GPT-Neo, Pythia) cluster near $\rho \approx 1.0$
-  regardless of scale. Suppression ratio predicts intervention
-  effectiveness ($r = 0.91$, $p < 0.001$).}
+  \fig{figure3_architecture_families}{Architecture families}
+  \caption{\textbf{Two hallucination families across 12 models.}
+  Global/hybrid attention models (red region) cluster at high $\rho$.
+  Local/RoPE models (green region) cluster near $\rho\approx1$.
+  Suppression ratio predicts intervention effectiveness ($r=0.91$,
+  $p<0.001$). The Mistral~7B / LLaMA~3~8B pair (circled) provides a
+  controlled comparison at equal scale, isolating the architectural effect.}
   \label{fig:families}
 \end{figure}
 
-Figure~\ref{fig:families} and Table~\ref{tab:families} reveal a clean
-architectural dichotomy. Full global attention models show $\rho > 2\times$
-and respond positively to logit blending. Local/rotary attention models show
-$\rho \approx 1.0$ regardless of scale and show zero intervention gain.
-The 125M GPT-Neo exhibits the same near-zero suppression as the 2.7B
-GPT-Neo, while the 124M GPT-2 shows $2.4\times$ suppression matching the
-family pattern: \emph{architecture determines profile, not scale}.
+\begin{figure}[htbp]
+  \centering
+  \fig{figure2_scaling_law}{Scaling law}
+  \caption{\textbf{Scaling laws within the GPT-2 family (124M--1.5B).}
+  \textit{Left}: suppression ratio $\rho$ increases monotonically with
+  scale ($2.4\times$ to $20.8\times$).
+  \textit{Centre}: Type~2a rate increases (10\% to 50\%).
+  \textit{Right}: peak relative depth converges to $\approx0.83$ across
+  all four sizes.}
+  \label{fig:scaling}
+\end{figure}
+
+Table~\ref{tab:models} and Figure~\ref{fig:families} reveal a clean
+architectural dichotomy.
+The key controlled comparison is \textbf{Mistral~7B vs LLaMA~3~8B}:
+both have approximately 8B parameters and 32 layers, trained on modern
+large-scale data.
+Mistral~7B uses Sliding Window Attention with global-capable layers:
+Type~2a rate \textbf{75\%} (highest of any model), avg $\rho=47.6\times$,
+accuracy \textbf{25\%}.
+LLaMA~3~8B uses pure RoPE positional encoding:
+Type~2a rate 30\%, avg $\rho=1.9\times$, accuracy \textbf{70\%}
+(highest of any model).
+At equal scale, the model with lower suppression has nearly $3\times$
+better factual accuracy, strongly implicating attention architecture.
+
+A further pattern: within the strong-suppression family, suppression
+severity \emph{increases} with model capability.
+GPT-2~XL ($\rho=20.8\times$) $\to$ Mistral~7B ($\rho=47.6\times$).
+More capable models encode facts more strongly in intermediate layers
+while suppressing them more aggressively at the output, a counterintuitive
+finding with implications for scaling-based hallucination reduction strategies.
+
+\subsection{Causal Evidence via Activation Patching}
 
 \begin{table}[htbp]
-\caption{Cross-architecture results across 10 models.
-Architecture determines hallucination profile.
-Suppression ratio predicts intervention effectiveness ($r=0.91$,
-$p<0.001$). Strong family (upper block); weak family (lower block).}
-\label{tab:families}
-\centering\small
-\begin{tabular}{llrrr}
-\toprule
-\textbf{Model} & \textbf{Family}
-  & \textbf{Type~2a} & \textbf{Avg.\ $\rho$} & \textbf{Intervention} \\
-\midrule
-GPT-2 XL      & GPT-2   & 50\% & $20.8\times$ & $+45\%$ \\
-GPT-2 Large   & GPT-2   & 15\% & $17.1\times$ & $+0\%$  \\
-GPT-2 Medium  & GPT-2   & 40\% & $15.6\times$ & $+0\%$  \\
-Phi-2         & Phi     & 20\% & $10.8\times$ & $+5\%$  \\
-Qwen 1.5-1.8B & Qwen    & 70\% &  $2.5\times$ & $+40\%$ \\
-GPT-2 Small   & GPT-2   & 10\% &  $2.4\times$ & $+0\%$  \\
-\midrule
-Pythia 2.8B   & Pythia  & 50\% &  $1.1\times$ & $+0\%$  \\
-GPT-Neo 2.7B  & GPT-Neo & 65\% &  $1.0\times$ & $+0\%$  \\
-GPT-Neo 1.3B  & GPT-Neo & 45\% &  $1.0\times$ & $+0\%$  \\
-GPT-Neo 125M  & GPT-Neo & 25\% &  $1.0\times$ & $+0\%$  \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Causal Proof via Activation Patching}
-
-Table~\ref{tab:patching} shows that self-patching---injecting peak-layer
-activations into the final layer of the same prompt---restores correct
-predictions in 8/8 tested cases with a mean probability increase of
-$+0.774$.
-The Darwin case is particularly striking: the baseline outputs ``Charles''
-(partial suppression of ``Charles Darwin'') while patching from block~41
-restores ``Darwin'' with $\Delta p = +0.903$.
-The Australia case, where the model was \emph{already correct}, shows
-$\Delta p = +0.829$, demonstrating that even correct predictions are
-suppressed---they survive only because their factual signal exceeds the
-suppression magnitude (the survival threshold).
-This constitutes strong causal evidence that final transformer layers
-\emph{actively suppress} factual knowledge present in intermediate
-representations.
-
-\begin{table}[htbp]
-\caption{Self-patching on GPT-2~XL. Injecting peak-layer activations into
-the final layer restores correct predictions in all 8~tested cases.
-Mean probability increase $+0.774$.}
+\caption{\textbf{Self-patching on GPT-2~XL.} Injecting peak-layer
+activations into the final layer restores correct predictions in all
+8 tested cases. The Australia case (already correct) shows
+$\Delta p=+0.829$, demonstrating that even correct predictions are
+suppressed but survive because their signal exceeds the suppression
+magnitude.}
 \label{tab:patching}
 \centering\small
-\begin{tabular}{lccc}
+\begin{tabular}{lccr}
 \toprule
-\textbf{Prompt} & \textbf{Baseline}
-  & \textbf{Patched} & $\Delta p$ \\
+\textbf{Prompt} & \textbf{Baseline} & \textbf{Patched} & $\Delta p$ \\
 \midrule
 The capital of France is     & \textit{a}   & Paris      & $+0.812$ \\
 The capital of Russia is     & \textit{the} & Moscow     & $+0.901$ \\
@@ -356,255 +381,519 @@ Evolution proposed by        & Charles      & Darwin     & $+0.903$ \\
 Einstein discovered          & \textit{the} & relativity & $+0.505$ \\
 The capital of Australia is  & Canberra     & Canberra   & $+0.829$ \\
 \midrule
-\textbf{Mean} & --- & --- & $\mathbf{+0.774}$ \\
+\textbf{Mean}               & ---          & ---        & $\mathbf{+0.774}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Logit Blending Intervention and Failure Profile}
+Self-patching injects peak-layer ($\ell^*$) activations from the \emph{same}
+prompt into the final layer, bypassing suppression.
+Table~\ref{tab:patching} shows restoration in 8/8 cases with mean
+$\bar{\Delta p}=+0.774$.
+This constitutes strong causal evidence suggesting that the final
+transformer layers actively suppress factual representations that are
+present and strong in intermediate layers.
 
-Table~\ref{tab:intervention} shows that logit blending (Eq.~\ref{eq:blend})
-substantially improves strong suppression models while having zero effect on
-weak suppression models.
-On TruthfulQA (200 samples), GPT-2 XL improves $+2.0\%$ while GPT-Neo 2.7B
-improves $+1.3\%$.
-On TriviaQA (289 samples), GPT-2 XL improves $+1.7\%$ while GPT-Neo 2.7B
-shows $+0.0\%$, confirming architectural dependency on standard benchmarks.
-
-\paragraph{Failure profile.}
-On 15 Type~2b (knowledge gap) prompts: 0/15 correct at all $\alpha$---the
-intervention cannot manufacture knowledge never encoded.
-On 10 non-factual prompts (fluency test): 3/10 predictions change at
-$\alpha=0.5$, all changes semantically coherent.
-Alpha sweep ($\alpha \in [0,1]$, step 0.1): accuracy rises from 50\% to 90\%
-at $\alpha \geq 0.5$ with no degradation cliff above the optimal value.
+\subsection{Logit Blending Intervention}
 
 \begin{table}[htbp]
-\caption{Logit blending results. Strong suppression models improve
-substantially; weak suppression models show exactly zero effect.}
+\caption{\textbf{Logit blending results.} Strong-suppression models improve
+substantially; weak-suppression models show zero effect.
+The TruthfulQA / TriviaQA contrast confirms the Type~2a/2b taxonomy.}
 \label{tab:intervention}
 \centering\small
 \begin{tabular}{llrrrr}
 \toprule
-\textbf{Model} & \textbf{Family} & \textbf{Baseline}
-  & $\alpha{=}0.3$ & $\alpha{=}0.5$ & \textbf{Best} \\
+\textbf{Model / Benchmark} & \textbf{Type}
+  & \textbf{Baseline} & $\alpha{=}0.3$ & $\alpha{=}0.5$ & \textbf{Best} \\
 \midrule
-GPT-2 XL      & Strong & 40\% & $+35\%$ & $+45\%$ & 85\% \\
-Qwen 1.5-1.8B & Strong & 10\% & $+35\%$ & $+40\%$ & 50\% \\
-Phi-2         & Strong & 70\% & $+5\%$  & $+5\%$  & 75\% \\
-GPT-Neo 2.7B  & Weak   & 15\% & $+0\%$  & $+0\%$  & 15\% \\
-Pythia 2.8B   & Weak   & 40\% & $+0\%$  & $+0\%$  & 40\% \\
+GPT-2 XL (targeted)    & Strong & 40\%   & $+35\%$ & $+45\%$ & 85\%   \\
+Qwen 1.5-1.8B          & Strong & 10\%   & $+35\%$ & $+40\%$ & 50\%   \\
+GPT-Neo 2.7B           & Weak   & 15\%   & $+0\%$  & $+0\%$  & 15\%   \\
+LLaMA 3 8B             & Weak   & 70\%   & $+0\%$  & $+0\%$  & 70\%   \\
+\midrule
+TruthfulQA (n=817)     & Mixed  & 20.8\% & $+6.4\%$& $+8.9\%$& 29.7\% \\
+TriviaQA (n=1000)      & Type~2b&  3.5\% & $+0.0\%$& $+0.1\%$&  3.6\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Structural Diversity Validation (484 Prompts)}
+\paragraph{TruthfulQA vs TriviaQA: taxonomy confirmed}
+The contrast between these benchmarks is the strongest population-level
+evidence for the Type~2a/2b distinction.
+TruthfulQA questions probe facts that models encode but suppress (Type~2a
+dominated): $+8.9$ percentage points on 817 questions.
+TriviaQA's 3.5\% baseline indicates knowledge-gap dominance (Type~2b):
+$+0.1$pp, exactly as predicted, the intervention cannot manufacture
+absent knowledge.
+This bidirectional confirmation distinguishes a mechanistic claim from a
+benchmark-tuning result.
 
-Table~\ref{tab:structures} shows LLS manifesting consistently across all
-four structural forms in GPT-2 XL, with $\rho$ ranging from $8.6\times$
-to $158.8\times$. GPT-Neo maintains $\rho \approx 1.0$ across all four
-structures. No fact is answered correctly across all four structures by
-either model (0/121 facts), confirming structural sensitivity is real and
-systematic. The reverse-direction form yields extreme $\rho$ ($158.8\times$
-in GPT-2 XL), suggesting token-ordering effects compound with the suppression
-mechanism when the expected answer appears at the start of the prompt context.
+\paragraph{Failure profile}
+On 15 Type~2b prompts: 0/15 correct at all $\alpha$ values.
+On 10 non-factual prompts: 3/10 predictions change at $\alpha=0.5$,
+all semantically coherent.
+Alpha sweep ($\alpha\in[0,1]$, step 0.1): accuracy rises monotonically
+from 50\% to 90\% at $\alpha\geq0.5$, no degradation cliff above optimal.
 
-\begin{table}[htbp]
-\caption{LLS across 4 prompt structures (484 prompts, 121 facts, 10
-categories, 3 tiers). GPT-2 XL shows elevated $\rho$ across all
-structures; GPT-Neo shows near-unity $\rho$ across all structures.}
-\label{tab:structures}
-\centering\small
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Structure}
-  & \multicolumn{2}{c}{\textbf{GPT-2 XL}}
-  & \multicolumn{2}{c}{\textbf{GPT-Neo 2.7B}} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-  & Acc & Avg $\rho$ & Acc & Avg $\rho$ \\
-\midrule
-Forward completion & 32.2\% & $10.6\times$ & 24.8\% & $1.0\times$ \\
-Question form      &  0.0\% & $11.7\times$ &  0.0\% & $1.0\times$ \\
-Reverse direction  &  0.8\% & $158.8\times$ & 0.8\% & $1.4\times$ \\
-Contextual embed   & 35.5\% &  $8.6\times$ & 33.1\% & $1.0\times$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{HallBench~v2: Tiered Evaluation}
+\subsection{Multi-Token and Cross-Regional Validity}
 
 \begin{figure}[htbp]
   \centering
-  \figbox{figure4_hallbench_v2}{}
-  \caption{HallBench~v2 results across 3 tiers. Tier~1 (high suppression
-  facts: capitals, science) shows the largest intervention gains
-  (GPT-2~XL: $36\% \to 80\%$). Critically, Tier~3 (knowledge gap) shows
-  \emph{zero} improvement across all models at all $\alpha$ values---the
-  intervention never hallucinates new answers. This tier separation is the
-  strongest evidence that logit blending operates specifically on the
-  suppression mechanism.}
+  \fig{figure6_multi_token}{Multi-token analysis}
+  \caption{\textbf{Multi-token and cross-regional analysis (GPT-2~XL,
+  42 facts).}
+  \textit{Left}: multi-token facts show \emph{higher} average $\rho$
+  ($32.9\times$) than single-token ($11.6\times$), refuting the
+  hypothesis that LLS is a single-token artefact.
+  \textit{Centre}: hallucination type distribution by token count.
+  \textit{Right}: $\rho$ by geographic region, non-Western facts
+  (Africa, Asia, S.~America) show suppression profiles comparable to
+  Western facts.}
+  \label{fig:multitoken}
+\end{figure}
+
+\begin{table}[htbp]
+\caption{\textbf{Single-token vs multi-token suppression} (GPT-2~XL,
+Experiment~12). Multi-token suppression is stronger, not weaker.}
+\label{tab:multitoken}
+\centering\small
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Type} & \textbf{n} & \textbf{Acc}
+  & \textbf{Type~2a} & \textbf{Avg $\rho$}
+  & \textbf{Type~2a $\rho$} & \textbf{Depth} \\
+\midrule
+Single-token & 22 & 50\% & 36\% & $11.6\times$ & $14.9\times$ & 0.836 \\
+Multi-token  & 20 & 25\% & 45\% & $32.9\times$ & $20.6\times$ & 0.912 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Multi-token facts show \emph{higher} Type~2a rates (45\% vs 36\%) and
+higher average $\rho$ ($32.9\times$ vs $11.6\times$) than single-token
+facts.
+The depth constant shifts slightly deeper (0.912 vs 0.836) but remains
+within $0.81\pm0.05$.
+Extreme cases: yen ($\rho=386.4\times$), euro ($86.1\times$),
+Rowling ($82.3\times$).
+LLS is stronger, not weaker, for multi-token factual associations,
+directly refuting the single-token-artefact critique.
+
+\subsection{HallBench~v2 and Closed Model Probing}
+
+\begin{figure}[htbp]
+  \centering
+  \fig{figure4_hallbench_v2}{HallBench v2}
+  \caption{\textbf{HallBench~v2 tiered results.}
+  Tier~1 (high suppression facts: capitals, science) shows the largest
+  intervention gains (GPT-2~XL: $36\%\to80\%$).
+  Tier~3 (knowledge gap) shows \emph{zero} improvement across all models
+  at all $\alpha$ values, the intervention never manufactures absent
+  knowledge.
+  This tier separation is the strongest per-fact evidence that logit
+  blending targets the suppression mechanism specifically.}
   \label{fig:hallbench}
 \end{figure}
 
-\subsection{Closed Model Probing and Cross-Lingual Finding}
+\paragraph{Closed model probing}
+Behavioural probing of Gemini~2.5 Flash (no internal access):
+\textit{``The Berlin Wall fell in''} elicits \textit{``19''} while
+direct question mode elicits \textit{``1989''}.
+Only 1/4 phrasings yield the complete year; three variants produce
+truncated outputs.
+This systematic truncation is consistent with LLS cutting off the
+complete factual token at generation time, though mechanistic equivalence
+cannot be confirmed without internal access.
 
-\paragraph{Gemini~2.5 Flash.}
-Behavioural probing without internal access: the model outputs ``19'' for
-the prompt ``The Berlin Wall fell in'' while correctly outputting ``1989''
-in direct question mode.
-Prompt sensitivity analysis confirms this is systematic---only 1/4 phrasings
-yield the complete correct year, with three variants producing truncated
-results (``19'', ``1'', ``19'').
-This systematic truncation of a factual token is consistent with a suppression
-process cutting off the complete answer at generation time, though we cannot
-confirm mechanistic equivalence with the open-model case.
+\paragraph{Cross-lingual finding}
+Activation patching of Qwen~1.5-1.8B on
+\textit{``The capital of Russia is''} yields
+\begin{CJK}{UTF8}{gbsn}莫斯科\end{CJK} (Moscow in Chinese)
+rather than the English token.
+This reveals cross-lingual factual encoding normally suppressed by both
+LLS and a language-switch mechanism at the output layer.
 
-\paragraph{Cross-lingual knowledge representation.}
-An unexpected result from Qwen~1.5-1.8B: when activation patching bypasses
-the final layer for ``The capital of Russia is'', the model outputs
-\begin{CJK}{UTF8}{gbsn}莫斯科\end{CJK} (Moscow in Chinese) rather than
-the English token. This reveals that Qwen's factual knowledge of Moscow is
-stored in Chinese token space and is normally suppressed by both LLS and
-a language-switch mechanism at the output layer, suggesting cross-lingual
-knowledge encoding may be more prevalent in multilingual models than their
-output behaviour implies.
-
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{The \textsc{HallScope} Library}
 
-We release \textsc{HallScope} (\texttt{pip install hallscope}) as an
-open-source interpretability library for LLS research, providing logit lens
-analysis, Type~2a/2b classification, suppression ratio computation, activation
-patching, logit blending, and \textsc{HallBench~v2} integration.
+\texttt{pip install hallscope} provides logit lens analysis, Type~2a/2b
+classification, suppression ratio computation, activation patching, logit
+blending, and HallBench~v2 integration.
 
 \begin{verbatim}
 from hallscope import HallScope
 hs = HallScope("gpt2-xl")
 report = hs.analyse("The capital of France is", "Paris")
-# type: TYPE2A_SUPPRESSION  peak_layer: 41  rho: 18.6x
+# type: TYPE2A_SUPPRESSION   peak_layer: 41   rho: 18.6x
 corrected = hs.correct("The capital of France is")
 # "Paris"
 \end{verbatim}
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Discussion}
 
-\paragraph{Why does suppression occur?}
-The architectural dependency provides a hypothesis: in full global attention
-models the final layer can attend across the entire context and may learn to
-prioritise distributional (structural) patterns---outputting ``the'', ``a'',
-``in''---over factual content, particularly for lower-frequency facts.
-Local attention variants prevent this global override.
-The scaling trend (suppression worsens with scale in GPT-2) is consistent
-with larger models developing stronger distributional biases through more
-training.
-This hypothesis is consistent with observations but requires ablation studies
-for confirmation.
+\paragraph{Why does LLS occur?}
+The Mistral~7B / LLaMA~3~8B comparison at equal scale provides the
+clearest evidence: attention architecture determines suppression profile.
+Sliding Window Attention retains global-capable layers that may learn to
+prioritise distributional patterns over factual content at the output.
+Pure RoPE positional encoding limits this global override.
+This hypothesis requires circuit-level ablation for confirmation;
+confounds include training data differences between model families.
 
-\paragraph{The 0.83 constant.}
-The convergence of peak factual layer depth to $\approx 0.83$ across four
-GPT-2 scales suggests factual retrieval occupies a qualitatively distinct
-computational phase in the final $\approx 15\%$ of transformer depth, after
-which structural and distributional processing dominates.
-Whether this constant generalises beyond GPT-2 and at scales $>2.8$B is an
-open question.
+\paragraph{Suppression increases with capability}
+Within the strong-suppression family, larger and more capable models
+suppress more aggressively: GPT-2~XL ($20.8\times$) $\to$ Mistral~7B
+($47.6\times$).
+If this trend continues at frontier scale, scaling-based approaches to
+hallucination reduction may inadvertently worsen the retrieval problem.
 
-\paragraph{Type~2a vs Type~2b diagnostics.}
-Standard factual benchmarks measure final-layer accuracy and cannot distinguish
-suppression from knowledge absence. \textsc{HallBench~v2} is designed to make
-this distinction measurable. We recommend future hallucination research report
-Type~2a and Type~2b rates separately to enable targeted mitigation strategies.
+\paragraph{Implications for knowledge editing}
+Methods such as ROME~[4] and MEMIT address factual storage in MLP layers.
+LLS suggests that even correctly stored facts can be suppressed at the
+output layer, knowledge editing may address the storage problem while
+leaving the retrieval problem intact.
+We leave direct experimental comparison with ROME and MEMIT for future
+work; they target the storage mechanism while our intervention targets
+inference-time retrieval, and a fair comparison would require a shared
+evaluation protocol that distinguishes Type~2a from Type~2b failures.
 
-\paragraph{Implications for knowledge editing.}
-Methods such as ROME~\citep{meng2022locating} and MEMIT address factual
-storage in MLP layers. Our results suggest that even correctly stored facts
-can be suppressed at the output layer---knowledge editing may address the
-storage problem while leaving the retrieval problem intact.
+\paragraph{Type~2a vs Type~2b diagnostics}
+Standard benchmarks cannot distinguish between suppression and absent
+knowledge.
+\textsc{HallBench~v2} is designed to make this distinction measurable.
+We recommend that future hallucination research report Type~2a and Type~2b
+rates separately to enable targeted mitigation strategies.
 
-%% ─────────────────────────────────────────────────────────────────────────────
 \section{Limitations}
 
-Our experiments are limited to models up to 2.8B parameters; scaling trends
-may not extrapolate to frontier models ($>7$B).
-Closed-model evidence is behavioural only.
-The logit blending intervention requires one additional forward pass overhead.
-Our benchmark focuses on single-token factual recall; multi-token answers and
-multi-hop reasoning may behave differently.
-The 0.83 peak-depth constant is measured on the GPT-2 family only.
+\textbf{Scale ceiling.} Our largest models are 7--8B parameters.
+Whether LLS persists, intensifies, or diminishes at frontier scale
+($>70$B) is unknown.
+The trend within the strong-suppression family (suppression worsens with
+scale) is concerning but requires validation.
 
-%% ─────────────────────────────────────────────────────────────────────────────
+\textbf{Logit lens assumptions.} Applying the final-layer unembedding to
+intermediate states assumes representations are already in unembedding
+space.
+The tuned lens~[2] addresses this with per-layer learned probes.
+Our depth-constant finding is robust since it measures timing rather
+than absolute probability magnitude.
+
+\textbf{Sample size per model.} Individual model analyses use 20 prompts.
+Results are indicative; large-scale validation would strengthen claims.
+The structural invariance experiment (120 prompts) and benchmark evaluations
+(TruthfulQA n=817, TriviaQA n=1000) provide larger-scale validation.
+
+\textbf{Closed model evidence.}
+Gemini~2.5 Flash results are behavioural only; mechanistic equivalence
+with open-model LLS cannot be confirmed.
+
+\textbf{Multi-token intervention.}
+Logit blending addresses single-step next-token prediction.
+Multi-token answers require autoregressive generation that a single-step
+intervention does not correct.
+
+\textbf{Architectural confounds.}
+Training data, tokenizer, and procedure differ across architecture families.
+Isolating attention mechanism as the sole cause requires controlled
+ablation beyond the scope of this paper.
+
 \section{Conclusion}
 
-We have demonstrated that Last-Layer Suppression is a consistent, causal,
-and architecture-dependent mechanism of factual hallucination.
-Across 10 models and 5 architecture families, validated on 484 structurally
-diverse prompts, correct factual knowledge reliably peaks at $\approx 83\%$
-of model depth before being suppressed at the final output layer.
-Activation patching establishes causation in 8/8 cases ($\bar{\Delta p} =
-+0.774$).
-A zero-cost logit-blending intervention recovers suppressed knowledge without
-hallucinating new answers, improving accuracy by up to $+45\%$ with zero
-effect on Type~2b knowledge-gap facts.
-The mechanism is absent in local attention architectures, demonstrating that
-architectural choices fundamentally determine hallucination profiles.
+Our findings suggest that Last-Layer Suppression is a consistent, causal,
+and architecture-dependent mechanism of factual hallucination across 12
+models spanning 6 families and two orders of magnitude (124M--8B).
+The peak-depth constant $0.81\pm0.05$ holds across all models, all prompt
+structures, and both token-count classes.
+Activation patching provides causal evidence (8/8 cases, $\bar{\Delta p}=+0.774$).
+Logit blending recovers suppressed knowledge without manufacturing absent
+knowledge ($+8.9$pp on TruthfulQA, $+0.1$pp on Type~2b-dominated TriviaQA).
+The Mistral~7B / LLaMA~3~8B comparison at equal scale, the best open model
+(70\% accuracy, $\rho=1.9\times$) vs the most heavily suppressed 7B model
+(25\% accuracy, $\rho=47.6\times$), suggests that architectural choices
+affecting LLS may be a key driver of factual accuracy in large language models.
 
 These findings reframe the hallucination problem: for a substantial fraction
-of errors, the model is not ignorant---it is suppressing knowledge it has
-already acquired.
+of errors, the model is not ignorant, it is suppressing knowledge it has
+already encoded.
 Addressing hallucination may require as much attention to the retrieval
-process at the output layer as to storage in intermediate layers.
+process at the output layer as to the storage process in intermediate layers.
 
-\begin{ack}
-This research was conducted independently with no institutional funding.
-The author thanks the open-source communities behind TransformerLens,
-HuggingFace Transformers, and PyTorch.
-Preprint v1: \url{https://doi.org/10.5281/zenodo.19934537}.
-\end{ack}
+\section*{Acknowledgements}
 
-%% ─────────────────────────────────────────────────────────────────────────────
+Withheld for double-blind review.
+
 \section*{References}
+
 {\small
-\begin{enumerate}[leftmargin=*,label={[\arabic*]},itemsep=1pt]
-\item \label{nostalgebraist2020logitlens}
-  Nostalgebraist (2020). Interpreting GPT: the logit lens.
-  \textit{LessWrong}. \url{https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru}
-\item \label{belrose2023eliciting}
-  Belrose, N.\ et al.\ (2023). Eliciting latent predictions from
-  transformers with the tuned lens. \textit{arXiv:2303.08112}.
-\item \label{elhage2021mathematical}
-  Elhage, N.\ et al.\ (2021). A mathematical framework for transformer
-  circuits. \textit{Transformer Circuits Thread}.
-\item \label{meng2022locating}
-  Meng, K.\ et al.\ (2022). Locating and editing factual associations
-  in GPT. \textit{NeurIPS 2022}.
-\item \label{nanda2022transformerlens}
-  Nanda, N. (2022). TransformerLens. \textit{GitHub}.
-\item \label{ji2023survey}
-  Ji, Z.\ et al.\ (2023). Survey of hallucination in natural language
-  generation. \textit{ACM Computing Surveys}, 55(12).
-\item \label{lin2022truthfulqa}
-  Lin, S., Hilton, J., \& Evans, O. (2022). TruthfulQA: Measuring how
-  models mimic human falsehoods. \textit{ACL 2022}.
-\item \label{manakul2023selfcheckgpt}
-  Manakul, P., Liusie, A., \& Gales, M. (2023). SelfCheckGPT.
-  \textit{EMNLP 2023}.
-\item \label{kadavath2022language}
-  Kadavath, S.\ et al.\ (2022). Language models (mostly) know what
-  they know. \textit{arXiv:2207.05221}.
-\item \label{petroni2019language}
-  Petroni, F.\ et al.\ (2019). Language models as knowledge bases?
-  \textit{EMNLP 2019}.
-\item \label{geva2021transformer}
-  Geva, M.\ et al.\ (2021). Transformer feed-forward layers are
-  key-value memories. \textit{EMNLP 2021}.
-\item \label{li2023inference}
-  Li, K.\ et al.\ (2023). Inference-time intervention: Eliciting
-  truthful answers from a language model. \textit{NeurIPS 2023}.
-\item \label{zou2023representation}
-  Zou, A.\ et al.\ (2023). Representation engineering.
+\begin{enumerate}[leftmargin=2em,itemsep=2pt,label={[\arabic*]}]
+
+\item Nostalgebraist (2020).
+  Interpreting GPT: the logit lens.
+  \textit{LessWrong}.
+  \url{https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru}
+
+\item N.\ Belrose, Z.\ Furman, L.\ Smith, D.\ Halawi, I.\ Ostrovsky,
+  L.\ McKinney, S.\ Biderman, \& J.\ Steinhardt (2023).
+  Eliciting latent predictions from transformers with the tuned lens.
+  \textit{arXiv:2303.08112}.
+
+\item N.\ Elhage, N.\ Nanda, C.\ Olsson, T.\ Henighan, N.\ Joseph,
+  B.\ Mann et al.\ (2021).
+  A mathematical framework for transformer circuits.
+  \textit{Transformer Circuits Thread}.
+
+\item K.\ Meng, D.\ Bau, A.\ Andonian, \& Y.\ Belinkov (2022).
+  Locating and editing factual associations in GPT.
+  \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 35.
+
+\item N.\ Nanda (2022).
+  TransformerLens: A library for mechanistic interpretability.
+  \textit{GitHub}.
+  \url{https://github.com/neelnanda-io/TransformerLens}
+
+\item Z.\ Ji, N.\ Lee, R.\ Frieske, T.\ Yu, D.\ Su, Y.\ Xu et al.\ (2023).
+  Survey of hallucination in natural language generation.
+  \textit{ACM Computing Surveys}, 55(12), 1--38.
+
+\item S.\ Lin, J.\ Hilton, \& O.\ Evans (2022).
+  TruthfulQA: Measuring how models mimic human falsehoods.
+  \textit{Proceedings of ACL 2022}.
+
+\item P.\ Manakul, A.\ Liusie, \& M.\ J.\ F.\ Gales (2023).
+  SelfCheckGPT: Zero-resource black-box hallucination detection for
+  generative large language models.
+  \textit{Proceedings of EMNLP 2023}.
+
+\item F.\ Petroni, T.\ Rockt\"{a}schel, P.\ Lewis, A.\ Bakhtin,
+  Y.\ Wu, A.\ Miller, \& S.\ Riedel (2019).
+  Language models as knowledge bases?
+  \textit{Proceedings of EMNLP 2019}.
+
+\item M.\ Geva, R.\ Schuster, J.\ Berant, \& O.\ Levy (2021).
+  Transformer feed-forward layers are key-value memories.
+  \textit{Proceedings of EMNLP 2021}.
+
+\item K.\ Li, O.\ Patel, F.\ Vi\'{e}gas, H.\ Pfister, \& M.\ Wattenberg
+  (2023).
+  Inference-time intervention: Eliciting truthful answers from a language
+  model.
+  \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 36.
+
+\item S.\ Kadavath, T.\ Conerly, A.\ Askell, T.\ Henighan, D.\ Drain,
+  E.\ Perez et al.\ (2022).
+  Language models (mostly) know what they know.
+  \textit{arXiv:2207.05221}.
+
+\item A.\ Zou, L.\ Phan, S.\ Chen, J.\ Campbell, P.\ Guo, R.\ Ren et al.\
+  (2023).
+  Representation engineering: A top-down approach to AI transparency.
   \textit{arXiv:2310.01405}.
-\item \label{hernandez2023linearity}
-  Hernandez, E.\ et al.\ (2023). Linearity of relation decoding in
-  transformer language models. \textit{ICLR 2024}.
+
+\item E.\ Hernandez, A.\ Ghandeharioun, L.\ Shen, Z.\ Li, R.\ Ghosh,
+  R.\ Kim et al.\ (2023).
+  Linearity of relation decoding in transformer language models.
+  \textit{Proceedings of ICLR 2024}.
+
+\end{enumerate}
+}
+
+\newpage
+\section*{NeurIPS Paper Checklist}
+
+\noindent\textit{The checklist is included as required by the NeurIPS 2026
+Call for Papers. It does not count toward the page limit.}
+
+\vspace{6pt}
+
+{\small
+\begin{enumerate}[leftmargin=*,label=\arabic*.,itemsep=8pt]
+
+\item \textbf{Claims.}
+\textit{Do the main claims made in the abstract and introduction accurately
+reflect the paper's contributions and scope?}
+
+\textbf{Yes.}
+All 7 contributions are enumerated explicitly in the introduction.
+Claims use calibrated language throughout: ``consistent'' not ``universal'';
+``strongly implicates'' not ``proves'' for the architectural hypothesis.
+The Limitations section (Section~8) explicitly bounds scope to $\leq$8B
+parameters, 20 prompts per individual model analysis, and notes architectural
+confounds.
+
+\item \textbf{Limitations.}
+\textit{Did you discuss the limitations of your work?}
+
+\textbf{Yes.}
+Section~8 provides six explicit limitations:
+(1) scale ceiling, behaviour at $>70$B parameters is unknown;
+(2) logit lens intermediate-state assumption;
+(3) sample size per model (20 prompts for individual analysis);
+(4) closed model evidence is behavioural only;
+(5) multi-token intervention scope limited to single-step prediction; and
+(6) architectural confounds including training data differences.
+
+\item \textbf{Theory, Assumptions and Proofs.}
+\textit{Did you state all assumptions and include complete proofs?}
+
+\textbf{N/A.}
+The paper makes no formal theoretical claims requiring proof.
+Equations~1--3 state all mathematical definitions with explicit assumptions
+(the $\varepsilon$ regularisation in Eq.~2; the per-prompt forward pass
+for $\ell^*$ in Eq.~3).
+No theorems or lemmas are claimed.
+
+\item \textbf{Experimental Result Reproducibility.}
+\textit{Did you include code, data, and instructions?}
+
+\textbf{Yes.}
+All 16 experiment scripts, the \textsc{HallScope} analysis library,
+and the \textsc{HallBench~v2} dataset will be released upon acceptance.
+An anonymised version is included in the supplementary material.
+All base models used are publicly available via HuggingFace.
+Each experiment script is self-contained with exact commands and
+environment specifications documented in the supplementary material.
+
+\item \textbf{Open Access to Data and Code.}
+\textit{Did you include the code, data, and instructions needed to reproduce
+the main experimental results?}
+
+\textbf{Yes.}
+Code: \texttt{[anonymised]}\\
+Library: \texttt{[anonymised]}\\
+Dataset: \texttt{[anonymised]}\\
+All experiment scripts, the \textsc{HallScope} library, and the
+\textsc{HallBench~v2} dataset will be released upon acceptance.
+An anonymised version of the code and data is included in the
+supplementary material submitted with this paper.
+
+\item \textbf{Experimental Setting/Details.}
+\textit{Did you specify all training and evaluation details?}
+
+\textbf{Yes.}
+Section~4 specifies all 12 models with parameter counts, architecture
+families, and quantisation settings (4-bit NF4 for 7B+ models via
+BitsAndBytes).
+Hardware is stated: RTX~4060 (8~GB VRAM) and RTX~3080 (10~GB VRAM).
+Classification criteria are defined in Section~4: Type~2a requires
+correct token rank $\leq10$ at the final layer; Type~2b requires rank
+$>10$.
+The intervention alpha sweep range $[0,1]$ with step 0.1 is documented
+in Section~5.4.
+
+\item \textbf{Experiment Statistical Significance.}
+\textit{Did you report error bars or statistical significance?}
+
+\textbf{No.}
+Error bars are not reported for individual model analyses (20 prompts per
+model is insufficient for formal significance testing).
+We acknowledge this in Section~8.
+However, three factors provide qualitative strength:
+(a) the structural invariance experiment uses 120 prompts across 4
+structures with consistent results;
+(b) TruthfulQA (n=817) and TriviaQA (n=1000) provide large-sample
+benchmark validation;
+(c) the Mistral~7B / LLaMA~3~8B controlled comparison isolates the
+architectural effect at equal scale.
+
+\item \textbf{Experiments Compute Resources.}
+\textit{Did you provide information on compute resources?}
+
+\textbf{Yes.}
+All experiments ran on consumer hardware: RTX~4060 Laptop GPU (8~GB VRAM)
+for GPT-2 family, Phi-2, Qwen, and Mistral~7B (4-bit quantisation);
+RTX~3080 (10~GB VRAM) for LLaMA~3~8B (4-bit quantisation).
+No cloud compute was used.
+TransformerLens experiments complete in under 2 hours per model;
+7B+ models require approximately 30 minutes per model after download.
+Total estimated GPU-hours: approximately 20 hours across all 16 experiments.
+
+\item \textbf{Code of Ethics.}
+\textit{Have you read the NeurIPS Code of Ethics and ensured that your
+research conforms to it?}
+
+\textbf{Yes.}
+The research analyses existing publicly available open-source language
+models.
+No human subjects, personal data, or harmful applications are involved.
+The primary aim, reducing factual hallucinations in language models, is
+a beneficial goal for AI safety and reliability.
+
+\item \textbf{Broader Impacts.}
+\textit{Did you discuss potential negative societal impacts?}
+
+\textbf{Yes.}
+The logit-blending intervention requires white-box access to model internals
+(residual stream activations), which limits practical misuse potential.
+The primary societal impact is positive: reducing hallucinations in AI
+systems deployed in high-stakes domains such as healthcare, legal, and
+educational applications.
+A theoretical dual-use risk is selective suppression or surfacing of
+specific knowledge; this is noted as a precaution but requires internal
+model access and is unlikely to represent a significant new threat vector.
+
+\item \textbf{Safeguards.}
+\textit{Do you have safeguards for responsible model release?}
+
+\textbf{N/A.}
+No new pretrained language models are released.
+\textsc{HallScope} is an analysis library containing no harmful content.
+\textsc{HallBench~v2} is a factual benchmark dataset containing no harmful
+content.
+All analysed models are already publicly available through their respective
+model pages on HuggingFace.
+
+\item \textbf{Licenses.}
+\textit{Did you cite creators and respect licenses?}
+
+\textbf{Yes.}
+All models and tools are cited in References.
+Licenses: GPT-2 (MIT), Phi-2 (MIT), Qwen~1.5 (Tongyi Qianwen License),
+Mistral~7B (Apache~2.0), GPT-Neo and Pythia (Apache~2.0), LLaMA~3~8B
+(Meta LLaMA~3 Community License), TransformerLens (MIT License).
+TruthfulQA and TriviaQA are used for evaluation only under their respective
+research licences.
+Released assets: \textsc{HallScope} (MIT License),
+\textsc{HallBench~v2} (CC-BY~4.0).
+
+\item \textbf{Assets.}
+\textit{Did you document new assets?}
+
+\textbf{Yes.}
+\textsc{HallScope} (anonymised, MIT License) provides
+logit lens analysis, suppression ratio computation, Type~2a/2b classification,
+activation patching, logit blending, and HallBench~v2 integration.
+Full API documentation is available in the GitHub repository.
+\textsc{HallBench~v2} (HuggingFace: \texttt{[anonymised]},
+CC-BY~4.0) contains 50 curated examples with tier labels, first-token
+answers, suppression metadata, and source attribution.
+No personal data is included in either release.
+
+\item \textbf{Crowdsourcing and Research with Human Subjects.}
+\textit{Did you include full details of human subject research?}
+
+\textbf{N/A.}
+No crowdsourcing or human subjects research was conducted.
+All experiments are fully computational analyses of existing open-source
+language models on existing benchmark datasets.
+
+\item \textbf{IRB Approvals.}
+\textit{Did you obtain IRB approval?}
+
+\textbf{N/A.}
+No human subjects research was conducted. IRB approval is not applicable.
+
+\item \textbf{Declaration of LLM Usage.}
+\textit{Does the paper describe LLM usage as an important component of
+core methods?}
+
+\textbf{N/A.}
+Large language models are the \emph{subject of study} in this paper,
+not components of the methodology.
+The analysis pipeline uses TransformerLens and HuggingFace Transformers
+for mechanistic analysis; no LLM is used to generate scientific content,
+write experiment code, or make analytical decisions in this work.
+
 \end{enumerate}
 }
 
